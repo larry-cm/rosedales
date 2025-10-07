@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<header>
+  <div class="flex justify-evenly p-6">
+    <!-- logo -->
+    <img
+      class="w-62"
+      src="https://canaveral.com.co/wp-content/uploads/2024/10/logo-cana.jpeg"
+      alt="logo de la pagina web provicional"
+    />
+
+    <!-- menu inicial -->
+    <ul
+      class="flex items-center justify-center gap-8 list-none text-lg font-medium"
+    >
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="eventos">eventos</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="locales">locales</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="promociones">Promociones</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="contactanos">contactanos</a
+        >
+      </li>
+    </ul>
+    <!-- botones de redes -->
+    <div
+      class="flex items-center justify-center gap-8 list-none *:border-2 *:border-primary *:p-1 *:rounded-full"
+    >
+      <a class="hover:scale-110 transition duration-300" href="facebook">
+        <Icon
+          name="facebook"
+          class="text-primary"
+          size={24}
+          stroke-width={1.5}
+        />
+      </a>
+      <a class="hover:scale-110 transition duration-300" href="instagram">
+        <Icon
+          name="instagram"
+          class="text-primary"
+          size={24}
+          stroke-width={1.5}
+        />
+      </a>
+      <a class="hover:scale-110 transition duration-300" href="linkedin">
+        <Icon
+          name="linkedin"
+          class="text-primary"
+          size={24}
+          stroke-width={1.5}
+        />
+      </a>
+    </div>
+  </div>
+</header>

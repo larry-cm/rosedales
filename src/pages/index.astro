@@ -1,11 +1,23 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "../styles/global.css";
+import Carousel from "../components/Carousel";
+const images = [
+  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
+  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
+];
 ---
 
 <Layout>
-	<Welcome />
+  <Header />
+  <Carousel arrayL={images.length} client:visible>
+    {
+      images.map((img) => (
+        <img class="min-w-full max-h-96 object-cover" src={img} />
+      ))
+    }
+  </Carousel>
 </Layout>
