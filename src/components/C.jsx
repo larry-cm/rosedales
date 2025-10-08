@@ -1,30 +1,16 @@
-import type React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronLeft,ChevronRight } from "react-feather";
 
-export default function Carousel({
-  hijos,
-  children:slides,
-  autoSlide = false,
-  autoSlideInterval = 3000
-}:{
-  autoSlide?:boolean,
-  autoSlideInterval?:number,
-  hijos:string[],
-  children?:React.ReactElement[]
-}){
+export default function Carousel({children:slides}){
 
   const [position,setPosition] = useState(0)
 
-  const nextPosition = () => setPosition(p => hijos && p === hijos.length - 1 ? 0 : p + 1 )
+  const nextPosition = () => setPosition(p => slides && p === slides.length - 1 ? 0 : p + 1 )
 
-  const prevPosition = () => setPosition(p => hijos && p === 0 ? hijos.length - 1 : p - 1)
+  const prevPosition = () => setPosition(p => slides && p === 0 ? slides.length - 1 : p - 1)
   
-console.log(Array.from(hijos || []))
-useEffect(() => {
-if(!autoSlide) return
+console.log(Array.from(slides || []).length)
 
-},[])
   return (
     <div className="overflow-hidden relative bg-green-500">
       <div className="flex transition-transform duration-300 ease-in-out"
@@ -46,14 +32,14 @@ if(!autoSlide) return
 
       <div className="absolute bottom-4 right-0 left-0">
         <div className="flex  items-center justify-center gap-2" >
-        {
-        hijos &&  hijos?.map((_,i) => (
+        {/* {
+        slides &&  slides?.map((_,i) => (
             <div className={
-              `transition-all size-3 bg-white/80 rounded-full ${position === i ?"p-2 " :"bg-opacity-50" }`
+              `transition-all size-3 bg-white rounded-full ${position === i ?"p-2 " :"bg-opacity-50" }`
               }>
             </div>
           ))
-        }
+        } */}
         
         </div>
       </div>
