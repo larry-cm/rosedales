@@ -1,0 +1,78 @@
+---
+import { Facebook, Instagram, Linkedin, Menu } from "react-feather";
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<header>
+  <div class="flex justify-evenly p-6">
+    <!-- logo -->
+    <img
+      class="w-36 lg:w-62"
+      src="https://canaveral.com.co/wp-content/uploads/2024/10/logo-cana.jpeg"
+      alt="logo de la pagina web provicional"
+    />
+    <!-- menu para mobiles -->
+    <nav class="lg:hidden flex items-center">
+      <button class="rounded bg-slate-400/20 p-1.5 cursor-pointer">
+        <Menu className="text-primary size-6" />
+      </button>
+    </nav>
+    <!-- menu inicial -->
+    <ul
+      class="hidden lg:flex items-center justify-center gap-8 list-none text-lg font-medium"
+    >
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="eventos">eventos</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="locales">locales</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="promociones">Promociones</a
+        >
+      </li>
+      <li>
+        <a
+          class="capitalize hover:text-primary transition duration-300"
+          href="contactanos">contactanos</a
+        >
+      </li>
+    </ul>
+    <!-- botones de redes -->
+    <div
+      class="flex items-center justify-center gap-4 lg:gap-8 list-none *:border-2 *:border-primary *:p-1 *:rounded-full"
+    >
+      <a class="hover:scale-110 transition duration-300" href="facebook">
+        <Facebook
+          className="text-primary p-0.5 size-5 lg:size-6 transition"
+          strokeWidth={2}
+        />
+      </a>
+      <a class="hover:scale-110 transition duration-300" href="instagram">
+        <Instagram
+          className="text-primary p-0.5 size-5 lg:size-6 transition"
+          strokeWidth={2}
+        />
+      </a>
+      <a class="hover:scale-110 transition duration-300" href="linkedin">
+        <Linkedin
+          className="text-primary p-0.5 size-5 lg:size-6 transition"
+          strokeWidth={2}
+        />
+      </a>
+    </div>
+  </div>
+</header>
