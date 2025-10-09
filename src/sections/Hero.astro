@@ -1,0 +1,16 @@
+---
+import Carousel from "../components/Carousel";
+const images = [
+  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
+  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
+  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
+];
+---
+
+  <Carousel hijos={images} client:visible>
+    {
+     images.map((img) => (
+        <img class="min-w-full max-h-96 object-cover" src={img} />
+      ))
+    }
+  </Carousel>
