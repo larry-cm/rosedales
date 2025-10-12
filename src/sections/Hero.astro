@@ -1,10 +1,103 @@
 ---
+import { Gift } from "react-feather";
 import Carousel from "../components/Carousel";
-const images = [
-  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
-  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
-  "https://media1.thrillophilia.com/filestore/n2ib9inwzcilxpg3aumbigvq4jus_IMG_World_Dubai_Fun_38a0986c1a.jpg?w=400&dpr=2",
-];
+import { IMAGES } from "../services/constantes.js";
 ---
 
-<Carousel autoSlide slides={images} client:visible />
+<style>
+    .animation-go-text {
+        animation: animationText 1s ease;
+    }
+    @keyframes animationText {
+        0% {
+            opacity: 0;
+            transform: translateY(-90px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<main>
+    <section class="relative">
+        <article class="bg-green-500">
+            <Carousel autoSlide slides={IMAGES} client:visible />
+            <article class="py-2 px-4">
+                <h2
+                    class="animation-go-text text-4xl text-white font-medium capitalize text-center mb-20 mt-16"
+                >
+                    Descubre nuestros <strong class="font-semibold"
+                        >almacenes repletos</strong
+                    >
+                    de novedades para ti.
+                </h2>
+            </article>
+        </article>
+
+        <article
+            class="absolute w-fit bg-zinc-900 shadow rounded-4xl rounded-bl px-6 py-4 -bottom-6 left-0 right-0 mx-auto flex justify-center items-center gap-2"
+        >
+            <span class="text-2xl text-white text-center font-bold">
+                Consigue tus obsequios
+            </span>
+            <Gift className="text-white size-6 hidden sm:block ms-1" />
+        </article>
+    </section>
+
+    <section class="mt-24">
+        <article class="p-4 text-center">
+            <h2 class="text-4xl font-light mb-4">
+                <b class="font-semibold tracking-wider"> Explora nuestros</b> principales
+                almacenes
+            </h2>
+        </article>
+        <article class="p-4">
+            <div
+                class="grid max-w-2xl mx-auto grid-cols-[repeat(auto-fill,minmax(250px,1fr))] rounded-xl overflow-hidden shadow"
+            >
+                {
+                    IMAGES.concat(IMAGES)
+                        .slice(0, 6)
+                        .map((img) => (
+                            <div class="border group border-primary shadow overflow-hidden relative">
+                                <img
+                                    src={IMAGES[0].url}
+                                    alt="card para la sección de almacenes"
+                                    class="h-44 w-full object-cover"
+                                />
+                                <footer class="p-2 absolute scale-0 opacity-0 group-hover:opacity-100 group-hover:scale-100  transition duration-300 bg-black/30 backdrop-blur-sm bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center w-full h-full">
+                                    <div class="flex flex-col min-h-full py-2">
+                                        <h3 class="text-white text-2xl font-semibold mb-2">
+                                            Almacén Principal
+                                        </h3>
+                                        <div class="flex-1 flex flex-col justify-center">
+                                            <p class="text-sm text-white">
+                                                local 123
+                                            </p>
+                                            <p class="text-sm text-white">
+                                                @instagram
+                                            </p>
+                                        </div>
+                                        <button class="border border-primary bg-transparent shadow h-8 hover:bg-primary transition duration-300 px-3 py-1 rounded-full text-base font-semibold text-white hover:text-white cursor-pointer focus:ring appearance-none ring-primary btn-effect ms-auto block">
+                                            Ver mas...
+                                        </button>
+                                    </div>
+                                </footer>
+                            </div>
+                        ))
+                }
+            </div>
+        </article>
+    </section>
+    <section class="mt-12 rounded-tl-[230px_130px] py-12 bg-primary">
+        <h3
+            class="mb-12 text-3xl font-normal text-center text-white tracking-wider"
+        >
+            Manejamos <strong class="font-semibold">gran variedad</strong> en productos.
+        </h3>
+        <article>
+            <p></p>
+        </article>
+    </section>
+</main>
