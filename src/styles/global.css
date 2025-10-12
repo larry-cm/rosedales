@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
-@theme{
-    --color-primary:#45ac00;
+@theme {
+    --color-primary: #45ac00;
+}
+
+.btn-effect {
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.no-rounded-transition {
+    transition: border-radius 0s;
 }

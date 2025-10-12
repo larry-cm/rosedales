@@ -1,22 +1,56 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Centro Comercial Rosedal. | Centro de Bucaramanga</title>
 	</head>
-	<body>
+	<body class="relative">
 		<slot />
 	</body>
 </html>
 
-<style>
+<style is:global>
+	@font-face {
+		font-family: "Noha-Head";
+		font-style: normal;
+		font-weight: normal;
+		font-display: swap;
+		src: url("/font/Noah-Head-Regular.ttf") format("truetype");
+	}
+	@font-face {
+		font-family: "Noha-Head";
+		font-style: normal;
+		font-weight: bold;
+		font-display: swap;
+		src: url("/font/Noah-Head-Bold.ttf") format("truetype");
+	}
+	/* @font-face {
+		font-family: "Noha-Head";
+		font-style: normal;
+		font-display: swap;
+		font-weight: bolder;
+		src: url("/font/Noah-Head-ExtraBold.ttf") format("truetype");
+	} */
 	html,
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
+
+		font-family:
+			"Noha-Head",
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			Oxygen,
+			Ubuntu,
+			Cantarell,
+			"Open Sans",
+			"Helvetica Neue",
+			sans-serif;
 	}
 </style>
