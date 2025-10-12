@@ -9,7 +9,7 @@ export default function Carousel({
 }: {
   autoSlide?: boolean,
   autoSlideInterval?: number,
-  slides: string[],
+  slides: Array<{ url: string, alt: string }>,
 }) {
 
   const [position, setPosition] = useState(0)
@@ -52,34 +52,35 @@ export default function Carousel({
   }, [])
 
   return (
-    <div className="overflow-hidden relative bg-green-500 ">
-      <div className="flex transition-transform duration-300 ease-in-out"
+    <div
+      className="overflow-hidden z-10 relative rounded-bl-[100px_70px] no-rounded-transition">
+      <div className="flex transition-transform duration-300 ease-in-out "
         style={{
           transform: `translateX(-${position * constPorcent}%)`
         }}
       >
         {
-          slides && slides.map((slide, i) => (
-            <img key={i} className="min-w-full h-[82svh] object-cover" src={slide} />
+          slides && slides.map(({ url: slide, alt }, i) => (
+            <img key={i} alt={alt} className="min-w-full h-[83svh] object-cover" src={slide} />
           ))
         }
       </div>
 
       <div className="absolute inset-0 flex items-center justify-between p-4">
-        <button onClick={handlePrevClick} className="cursor-pointer  p-2 rounded-full shadow">
-          <ChevronLeft className="hidden md:block md:size-16 stroke-primary hover:scale-110 scale-100 transition duration-300" size={24} strokeWidth="1.5" />
+        <button onClick={handlePrevClick} className="focus:ring ring-primary cursor-pointer   rounded-full shadow">
+          <ChevronLeft className="block btn-effect bg-white/70 backdrop-blur-md rounded-full md:size-12 stroke-primary  transition duration-300" size={24} strokeWidth="1.5" />
         </button>
-        <button onClick={handleNextClick} className="cursor-pointer  p-2 rounded-full shadow">
-          <ChevronRight className="hidden md:block md:size-16 stroke-primary hover:scale-110 scale-100 transition duration-300" size={24} strokeWidth="1.5" />
+        <button onClick={handleNextClick} className="focus:ring ring-primary cursor-pointer   rounded-full shadow">
+          <ChevronRight className="block btn-effect bg-white/70 backdrop-blur-md rounded-full md:size-12 stroke-primary scale-100 transition duration-300" size={24} strokeWidth="1.5" />
         </button>
       </div>
 
-      <div className="absolute bottom-4 right-0 left-0">
-        <div className="flex items-center justify-center gap-2 h-8 bg-white/80 rounded-full shadow w-fit mx-auto px-3 py-1" >
+      <div className=" absolute bottom-4 right-0 left-0">
+        <div className="flex items-center justify-center gap-2 h-12 backdrop-blur-md bg-white/70 rounded-full shadow min-w-28 w-fit mx-auto px-3 py-1" >
           {
             slides && slides?.map((_, i) => (
               <div onClick={() => moveToSlide({ position: i })} key={i} className={
-                `transition-all size-3 rounded-full ${position === i ? "p-2 bg-primary" : "bg-primary/50"}`
+                `transition-all size-3 rounded-full hover:scale-110 hover:cursor-pointer hover:bg-primary/80 ${position === i ? "p-2 bg-primary" : "bg-primary/70"}`
               }>
               </div>
             ))
