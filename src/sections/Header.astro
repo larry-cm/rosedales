@@ -1,19 +1,23 @@
 ---
 import { Facebook, Instagram, Linkedin, Menu } from "react-feather";
 interface Props {
-  title?: string;
-  description?: string;
+  socialMedia?: Element[];
+  urls?: string[];
+  logoUrl?: string;
 }
-
-const { title, description } = Astro.props;
+const {
+  socialMedia = [Facebook, Instagram, Linkedin],
+  urls = ["Eventos", "Promociones", "Locales", "Contáctanos"],
+  logoUrl = "https://canaveral.com.co/wp-content/uploads/2024/10/logo-cana.jpeg",
+} = Astro.props;
 ---
 
 <header>
-  <div class="flex justify-evenly p-6">
+  <div class="flex justify-between md:justify-evenly p-4">
     <!-- logo -->
     <img
-      class="w-36 lg:w-62"
-      src="https://canaveral.com.co/wp-content/uploads/2024/10/logo-cana.jpeg"
+      class="w-28 lg:w-62"
+      src={logoUrl}
       alt="logo de la pagina web provicional"
     />
     <!-- menu para mobiles -->
@@ -26,53 +30,37 @@ const { title, description } = Astro.props;
     <ul
       class="hidden lg:flex items-center justify-center gap-8 list-none text-lg font-medium"
     >
-      <li>
-        <a
-          class="capitalize hover:text-primary transition duration-300"
-          href="eventos">eventos</a
-        >
-      </li>
-      <li>
-        <a
-          class="capitalize hover:text-primary transition duration-300"
-          href="locales">locales</a
-        >
-      </li>
-      <li>
-        <a
-          class="capitalize hover:text-primary transition duration-300"
-          href="promociones">Promociones</a
-        >
-      </li>
-      <li>
-        <a
-          class="capitalize hover:text-primary transition duration-300"
-          href="contactanos">contactanos</a
-        >
-      </li>
+      {
+        urls &&
+          urls.map((enlace) => (
+            <li>
+              <a
+                class="capitalize hover:text-primary transition duration-300"
+                href={enlace.toLowerCase()}
+              >
+                {enlace}
+              </a>
+            </li>
+          ))
+      }
     </ul>
     <!-- botones de redes -->
     <div
-      class="flex items-center justify-center gap-4 lg:gap-8 list-none *:border-2 *:border-primary *:p-1 *:rounded-full"
+      class="flex items-center justify-center gap-4 lg:gap-8 list-none *:border *:md:border-2 *:border-primary *:p-0.5 *:md:p-1 *:rounded-full"
     >
-      <a class="hover:scale-110 transition duration-300" href="facebook">
-        <Facebook
-          className="text-primary p-0.5 size-5 lg:size-6 transition"
-          strokeWidth={2}
-        />
-      </a>
-      <a class="hover:scale-110 transition duration-300" href="instagram">
-        <Instagram
-          className="text-primary p-0.5 size-5 lg:size-6 transition"
-          strokeWidth={2}
-        />
-      </a>
-      <a class="hover:scale-110 transition duration-300" href="linkedin">
-        <Linkedin
-          className="text-primary p-0.5 size-5 lg:size-6 transition"
-          strokeWidth={2}
-        />
-      </a>
+      {
+        socialMedia &&
+          socialMedia.map((MyIcon: any) => (
+            <a class="hover:scale-110 transition duration-300" href="facebook">
+              {
+                <MyIcon
+                  className="text-primary p-0.5 size-4 md:size-5 lg:size-6 transition"
+                  strokeWidth={2}
+                />
+              }
+            </a>
+          ))
+      }
     </div>
   </div>
 </header>
