@@ -7,10 +7,4 @@ const images = [
 ];
 ---
 
-  <Carousel hijos={images} client:visible>
-    {
-     images.map((img) => (
-        <img class="min-w-full max-h-96 object-cover" src={img} />
-      ))
-    }
-  </Carousel>
+<Carousel autoSlide slides={images} client:visible />
