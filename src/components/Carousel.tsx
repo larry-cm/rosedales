@@ -1,67 +1,33 @@
-import type React from "react";
-import { useEffect, useState, useRef } from "react";
+import useCarousel from "../hooks/useCarousel";
 import { ChevronLeft, ChevronRight } from "react-feather";
+import PointsSlides from "./PointsSlides";
 
 export default function Carousel({
   slides,
   autoSlide = false,
-  autoSlideInterval = 5000
+  autoSlideInterval = 5000,
+  visibleSlides = 1,
 }: {
   autoSlide?: boolean,
   autoSlideInterval?: number,
   slides: Array<{ url: string, alt: string }>,
+  visibleSlides?: number,
 }) {
 
-  const [position, setPosition] = useState(0)
-  const constPorcent = 100
-
-  // auto slide
-  const slideInterval = useRef<NodeJS.Timeout | number>(0)
-
-  const resetInterval = () => {
-    if (slideInterval.current !== null) {
-      clearInterval(slideInterval.current)
-      slideInterval.current = 0
-    }
-  }
-  const startInterval = () => {
-    if (!autoSlide) return
-    resetInterval()
-    slideInterval.current = setInterval(nextPosition, autoSlideInterval)
-  }
-  const moveToSlide = ({ position }: { position: number }) => {
-    setPosition(position)
-    startInterval()
-  }
-  // movimiento de los botones
-  const nextPosition = () => setPosition(p => slides && p === slides.length - 1 ? 0 : p + 1)
-  const prevPosition = () => setPosition(p => slides && p === 0 ? slides.length - 1 : p - 1)
-
-  const handlePrevClick = () => {
-    prevPosition()
-    startInterval()
-  }
-  const handleNextClick = () => {
-    nextPosition()
-    startInterval()
-  }
-
-  useEffect(() => {
-    startInterval()
-    return () => resetInterval()
-  }, [])
+  const { handleNextClick, handlePrevClick, moveToSlide, position, constPorcent, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
 
   return (
     <div
-      className="overflow-hidden z-10 relative rounded-bl-[100px_70px] no-rounded-transition">
-      <div className="flex transition-transform duration-300 ease-in-out "
+      className="overflow-hidden z-10 relative no-rounded-transition">
+      <div className="flex transition-transform duration-700 ease-in-out "
         style={{
           transform: `translateX(-${position * constPorcent}%)`
         }}
       >
         {
           slides && slides.map(({ url: slide, alt }, i) => (
-            <img key={i} alt={alt} className="min-w-full h-[83svh] object-cover" src={slide} />
+            // Cada slide ocupa (100 / visibleSlides) % del contenedor
+            <img key={i} alt={alt} className="h-[83svh] object-cover" style={{ minWidth: `${100 / visibleSlides}%` }} src={slide} />
           ))
         }
       </div>
@@ -75,18 +41,7 @@ export default function Carousel({
         </button>
       </div>
 
-      <div className=" absolute bottom-4 right-0 left-0">
-        <div className="flex items-center justify-center gap-2 h-12 backdrop-blur-md bg-white/70 rounded-full shadow min-w-28 w-fit mx-auto px-3 py-1" >
-          {
-            slides && slides?.map((_, i) => (
-              <div onClick={() => moveToSlide({ position: i })} key={i} className={
-                `transition-all size-3 rounded-full hover:scale-110 hover:cursor-pointer hover:bg-primary/80 ${position === i ? "p-2 bg-primary" : "bg-primary/70"}`
-              }>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+      <PointsSlides maxPosition={maxPosition} moveToSlide={moveToSlide} position={position} />
     </div>
   )
 }
