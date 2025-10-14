@@ -1,0 +1,12 @@
+# robots.txt for Centro Comercial Rosedal
+# Allow all crawlers by default. Adjust Disallow rules if you need to block paths (admin, staging, params, etc.).
+User-agent: *
+Disallow:
+
+# Crawl-delay is supported by some crawlers (e.g., Bing). Use with care.
+# Crawl-delay: 10
+
+# Sitemap location (update SITE_URL to your production domain)
+Sitemap: {SITE_URL}/sitemap.xml
+
+# Note: Replace {SITE_URL} with your actual site URL (for example: https://www.example.com)

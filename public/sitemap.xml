@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Replace {SITE_URL} with your canonical site URL (e.g. https://www.my-site.com) -->
+  <url>
+    <loc>{SITE_URL}/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>{SITE_URL}/favicon.svg</image:loc>
+      <image:caption>Centro Comercial Rosedal</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Add more URLs here. If you generate pages dynamically, consider creating sitemap during build. -->
+
+</urlset>

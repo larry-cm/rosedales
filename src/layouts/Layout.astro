@@ -1,11 +1,61 @@
+---
+import { URL_LOGO } from "../services/constantes.js";
+// SITE_URL should be set in your environment for build (e.g. import.meta.env.SITE_URL)
+const SITE_URL = (import.meta.env && import.meta.env.SITE_URL) || '{SITE_URL}';
+const title = 'Centro Comercial Rosedal. | Bucaramanga';
+const description = 'Centro Comercial Rosedal en Bucaramanga — encuentra eventos, promociones y locales. Visítanos y descubre ofertas y novedades.';
+const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, locales, tiendas';
+
+---
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Centro Comercial Rosedal. | Centro de Bucaramanga</title>
+		<title>{title}</title>
+
+		<!-- Primary SEO -->
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={`${SITE_URL}/`} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={`${SITE_URL}/`} />
+		<meta property="og:site_name" content="Centro Comercial Rosedal" />
+		<meta property="og:image" content={URL_LOGO} />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={URL_LOGO} />
+
+		<!-- Link to sitemap -->
+		<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+
+		<!-- JSON-LD Organization -->
+		<script type="application/ld+json">
+			{
+				`{
+					"@context": "https://schema.org",
+					"@type": "Organization",
+					"name": "Centro Comercial Rosedal",
+					"url": "${SITE_URL}",
+					"logo": "${URL_LOGO}",
+					"sameAs": [
+						"https://www.facebook.com/",
+						"https://www.instagram.com/",
+						"https://www.linkedin.com/"
+					]
+				}`
+			}
+		</script>
 	</head>
 	<body class="relative">
 		<slot />
