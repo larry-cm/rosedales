@@ -1,4 +1,4 @@
-import useCarousel from "../hooks/useCarousel";
+import useCarousel, { type UseCarousel } from "../hooks/useCarousel";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import PointsSlides from "./PointsSlides";
 
@@ -7,12 +7,7 @@ export default function Carousel({
   autoSlide = false,
   autoSlideInterval = 5000,
   visibleSlides = 1,
-}: {
-  autoSlide?: boolean,
-  autoSlideInterval?: number,
-  slides: Array<{ url: string, alt: string }>,
-  visibleSlides?: number,
-}) {
+}: UseCarousel) {
 
   const { handleNextClick, handlePrevClick, moveToSlide, position, constPorcent, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
 

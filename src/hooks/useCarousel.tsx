@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-export default function useCarousel({ autoSlideInterval, autoSlide, slides, visibleSlides = 1 }: { autoSlide?: boolean, autoSlideInterval?: number, slides: Array<{ url: string, alt: string }>, visibleSlides?: number }) {
+export type MoveToSlide = { position: number }
+export interface UseCarousel {
+    autoSlide?: boolean,
+    autoSlideInterval?: number,
+    slides: Array<{ url: string, alt: string }>,
+    visibleSlides?: number
+}
+export default function useCarousel({ autoSlideInterval, autoSlide, slides, visibleSlides = 1 }: UseCarousel) {
     const [position, setPosition] = useState(0)
     // cada slide visible ocupa 100 / visibleSlides % del ancho del contenedor
     const constPorcent = 100 / visibleSlides
@@ -20,7 +27,7 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
         resetInterval()
         slideInterval.current = setInterval(nextPosition, autoSlideInterval)
     }
-    const moveToSlide = ({ position }: { position: number }) => {
+    const moveToSlide = ({ position }: MoveToSlide) => {
         // aseguramos rango
         const pos = Math.max(0, Math.min(position, maxPosition))
         setPosition(pos)

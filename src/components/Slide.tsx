@@ -4,12 +4,19 @@ import PointsSlides from "./PointsSlides"
 import { ChevronRight, ChevronLeft } from "react-feather"
 import { useEffect, useRef, useState } from "react"
 
+type TypeMp4 = { url: string, alt: string }[]
 
-export default function Slide({ videoMp4s }: { videoMp4s: { url: string, alt: string }[] }) {
+export default function Slide({ videoMp4s }: { videoMp4s: TypeMp4 }) {
 
     const trackRef = useRef<HTMLDivElement | null>(null)
     const [translatePx, setTranslatePx] = useState(0)
 
+    const [trackWidth, setTrackWidth] = useState(0)
+    const visibleSlides = trackWidth <= 900 ? 1 : 3
+
+    const { handleNextClick, handlePrevClick, position, moveToSlide, maxPosition } = useCarousel({ autoSlide: true, autoSlideInterval: 3000, slides: videoMp4s || [], visibleSlides })
+
+    // mover con el necesario
     const computeTranslate = () => {
         const track = trackRef.current
         if (!track) return
@@ -22,11 +29,6 @@ export default function Slide({ videoMp4s }: { videoMp4s: { url: string, alt: st
         const step = itemWidth + gapPx
         setTranslatePx(Math.round(position * step))
     }
-    const [trackWidth, setTrackWidth] = useState(0)
-    const visibleSlides = trackWidth <= 900 ? 1 : 3
-
-    const { handleNextClick, handlePrevClick, position, moveToSlide, maxPosition } = useCarousel({ autoSlide: true, autoSlideInterval: 5000, slides: videoMp4s || [], visibleSlides })
-
     useEffect(() => {
         computeTranslate()
         const track = trackRef.current
@@ -48,7 +50,7 @@ export default function Slide({ videoMp4s }: { videoMp4s: { url: string, alt: st
             }
         }
     }, [position, videoMp4s])
-
+    // veo el ancho de la pantalla para cambiar la cantidad de items
     useEffect(() => {
         const updateWidth = () => {
             if (document.body) {
