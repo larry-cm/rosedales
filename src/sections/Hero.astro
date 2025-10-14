@@ -1,7 +1,10 @@
 ---
-import { Gift } from "react-feather";
+import { ExternalLink, Gift } from "react-feather";
 import Carousel from "../components/Carousel";
-import { IMAGES } from "../services/constantes.js";
+import { IMAGES, URL_LOGO } from "../services/constantes.js";
+import Slide from "../components/Slide";
+import videoMp4 from "../assets/videos/videosCarousel.mp4";
+import Image from "astro/components/Image.astro";
 ---
 
 <style>
@@ -20,6 +23,7 @@ import { IMAGES } from "../services/constantes.js";
     }
 </style>
 <main>
+    <!-- carousel -->
     <section class="relative">
         <article class="bg-green-500">
             <Carousel autoSlide slides={IMAGES} client:visible />
@@ -44,60 +48,80 @@ import { IMAGES } from "../services/constantes.js";
             <Gift className="text-white size-6 hidden sm:block ms-1" />
         </article>
     </section>
-
-    <section class="mt-24">
+    <!-- locales principales -->
+    <section class="mt-16">
         <article class="p-4 text-center">
             <h2 class="text-4xl font-light mb-4">
                 <b class="font-semibold tracking-wider"> Explora nuestros</b> principales
                 almacenes
             </h2>
         </article>
-        <article class="p-4">
-            <div
-                class="grid max-w-2xl mx-auto grid-cols-[repeat(auto-fill,minmax(250px,1fr))] rounded-xl overflow-hidden shadow"
-            >
-                {
-                    IMAGES.concat(IMAGES)
-                        .slice(0, 6)
-                        .map((img) => (
-                            <div class="border group border-primary shadow overflow-hidden relative">
-                                <img
-                                    src={IMAGES[0].url}
-                                    alt="card para la sección de almacenes"
-                                    class="h-44 w-full object-cover"
-                                />
-                                <footer class="p-2 absolute scale-0 opacity-0 group-hover:opacity-100 group-hover:scale-100  transition duration-300 bg-black/30 backdrop-blur-sm bottom-0 left-1/2 -translate-x-1/2 flex justify-center items-center w-full h-full">
-                                    <div class="flex flex-col min-h-full py-2">
-                                        <h3 class="text-white text-2xl font-semibold mb-2">
-                                            Almacén Principal
-                                        </h3>
-                                        <div class="flex-1 flex flex-col justify-center">
-                                            <p class="text-sm text-white">
-                                                local 123
-                                            </p>
-                                            <p class="text-sm text-white">
-                                                @instagram
-                                            </p>
-                                        </div>
-                                        <button class="border border-primary bg-transparent shadow h-8 hover:bg-primary transition duration-300 px-3 py-1 rounded-full text-base font-semibold text-white hover:text-white cursor-pointer focus:ring appearance-none ring-primary btn-effect ms-auto block">
-                                            Ver mas...
-                                        </button>
-                                    </div>
-                                </footer>
-                            </div>
-                        ))
-                }
-            </div>
-        </article>
-    </section>
-    <section class="mt-12 rounded-tl-[230px_130px] py-12 bg-primary">
-        <h3
-            class="mb-12 text-3xl font-normal text-center text-white tracking-wider"
+        <section
+            class="p-4 grid max-w-4xl mx-auto grid-cols-1 md:grid-cols-3 gap-6"
         >
-            Manejamos <strong class="font-semibold">gran variedad</strong> en productos.
+            {
+                IMAGES.concat(IMAGES)
+                    .slice(0, 3)
+                    .map((img) => (
+                        <div>
+                            <a
+                                href={img.slug}
+                                class=" group/link shadow overflow-hidden relative flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
+                            >
+                                <img
+                                    src={img.url}
+                                    alt={img.alt}
+                                    class="h-44 w-auto aspect-video  md:w-full object-cover"
+                                />
+                                <i class="absolute top-4 right-4 text-white bg-zinc-700/70 group-hover/link:bg-zinc-700/80 transition-colors duration-300 cursor-pointer shadow px-2 py-1.5 rounded-xl flex justify-center items-center">
+                                    <ExternalLink className=" size-6" />
+                                </i>
+                            </a>
+                            <article class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
+                                <h3 class="text-2xl font-semibold tracking-wide">
+                                    Lorem ipsum dolor sit
+                                </h3>
+                                <a href={img.slug} class="underline text-lg">
+                                    Ir a conocer mas.
+                                </a>
+                            </article>
+                        </div>
+                    ))
+            }
+        </section>
+    </section>
+    <!-- algunos locales -->
+    <section class="mt-14 py-12 rounded-tl-[230px_130px] bg-green-500 px-4">
+        <h3
+            class="mb-2 p-4 ps-10 text-4xl font-normal text-pretty text-center text-white tracking-wider"
+        >
+            Manejamos <strong class="font-semibold">gran variedad</strong> en productos
         </h3>
-        <article>
-            <p></p>
-        </article>
+
+        <div class="mt-6 flex flex-col lg:flex-row gap-8 p-4">
+            <Slide
+                videoMp4s={[
+                    { url: videoMp4, alt: "primer video de la semana" },
+                    { url: videoMp4, alt: "primer video de la semana" },
+                    { url: videoMp4, alt: "primer video de la semana" },
+                    { url: videoMp4, alt: "primer video de la semana" },
+                    { url: videoMp4, alt: "primer video de la semana" },
+                    { url: videoMp4, alt: "primer video de la semana" },
+                ]}
+                client:visible
+            />
+            <article
+                class="ms-auto bg-white p-2 rounded-full grid place-content-center size-50 my-auto"
+            >
+                <Image
+                    width={200}
+                    height={200}
+                    loading="lazy"
+                    src={URL_LOGO || "/image.webp"}
+                    alt="imagen de la entrara del centro comercial"
+                    class="aspect-auto w-64"
+                />
+            </article>
+        </div>
     </section>
 </main>
