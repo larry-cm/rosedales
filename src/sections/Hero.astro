@@ -1,5 +1,12 @@
 ---
-import { ExternalLink, Gift } from "react-feather";
+import {
+    CreditCard,
+    DollarSign,
+    ExternalLink,
+    Gift,
+    ShoppingBag,
+    Truck,
+} from "react-feather";
 import Carousel from "../components/Carousel";
 import { IMAGES, URL_LOGO } from "../services/constantes.js";
 import Slide from "../components/Slide";
@@ -25,7 +32,7 @@ import Image from "astro/components/Image.astro";
 <main>
     <!-- carousel -->
     <section class="relative">
-        <article class="bg-green-500">
+        <div class="bg-green-500">
             <Carousel autoSlide slides={IMAGES} client:visible />
             <article class="py-2 px-4">
                 <h2
@@ -34,10 +41,10 @@ import Image from "astro/components/Image.astro";
                     Descubre nuestros <strong class="font-semibold"
                         >almacenes repletos</strong
                     >
-                    de novedades para ti.
+                    de novedades para ti
                 </h2>
             </article>
-        </article>
+        </div>
 
         <article
             class="absolute w-fit bg-zinc-900 shadow rounded-4xl rounded-bl px-6 py-4 -bottom-6 left-0 right-0 mx-auto flex justify-center items-center gap-2"
@@ -49,7 +56,7 @@ import Image from "astro/components/Image.astro";
         </article>
     </section>
     <!-- locales principales -->
-    <section class="mt-16">
+    <section class="mt-20">
         <article class="p-4 text-center">
             <h2 class="text-4xl font-light mb-4">
                 <b class="font-semibold tracking-wider"> Explora nuestros</b> principales
@@ -68,7 +75,10 @@ import Image from "astro/components/Image.astro";
                                 href={img.slug}
                                 class=" group/link shadow overflow-hidden relative flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
                             >
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
+                                    loading="lazy"
                                     src={img.url}
                                     alt={img.alt}
                                     class="h-44 w-auto aspect-video  md:w-full object-cover"
@@ -93,12 +103,12 @@ import Image from "astro/components/Image.astro";
     <!-- algunos locales -->
     <section class="mt-14 py-12 rounded-tl-[230px_130px] bg-green-500 px-4">
         <h3
-            class="mb-2 p-4 ps-10 text-4xl font-normal text-pretty text-center text-white tracking-wider"
+            class="mb-4 p-4 pt-14 md:p-8 text-4xl font-normal text-pretty text-center text-white tracking-wider"
         >
             Manejamos <strong class="font-semibold">gran variedad</strong> en productos
         </h3>
 
-        <div class="mt-6 flex flex-col lg:flex-row gap-8 p-4">
+        <div class="flex flex-col lg:flex-row gap-12 md:gap-6 p-4">
             <Slide
                 videoMp4s={[
                     { url: videoMp4, alt: "primer video de la semana" },
@@ -111,7 +121,7 @@ import Image from "astro/components/Image.astro";
                 client:visible
             />
             <article
-                class="ms-auto bg-white p-2 rounded-full grid place-content-center size-50 my-auto"
+                class="mx-auto md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 my-auto"
             >
                 <Image
                     width={200}
@@ -123,5 +133,107 @@ import Image from "astro/components/Image.astro";
                 />
             </article>
         </div>
+    </section>
+    <!-- algo sobre el centro comercial -->
+    <section class="bg-green-500 p-8 rounded-bl-[230px_130px]">
+        <article>
+            <h3 class="text-4xl font-normal text-white">
+                Contamos con <strong class="font-semibold"
+                    >zona de relajación</strong
+                >, <strong class="font-semibold">parqueadero</strong> y
+                <strong class="font-semibold">productos finos</strong> y de alta
+                calidad
+            </h3>
+        </article>
+        <article class="flex flex-col md:flex-row mt-12">
+            <div
+                class="*:text-xl md:*:text-2xl *:leading-relaxed text-white space-y-[1lh]"
+            >
+                <p>
+                    Somos un centro comercial comprometido con ofrecer una
+                    <b>experiencia segura y gratificante</b>
+                    , moderna y de alta calidad.
+                </p>
+                <p>
+                    Contamos con espacios amplios, atención al cliente
+                    personalizada y una cuidada selección de marcas y productos,
+                    pensados para satisfacer cada una de tus necesidades.
+                </p>
+            </div>
+
+            <div class="md:min-w-xs lg:min-w-xl grid place-content-center">
+                <ShoppingBag className="size-6 text-white" />
+            </div>
+        </article>
+
+        <div class="pb-30 pt-12 w-full">
+            <h4 class="text-3xl text-center mb-12 font-semibold text-zinc-50">
+                Contamos con servicios
+            </h4>
+
+            <div class="flex justify-evenly flex-wrap gap-4">
+                {
+                    Array(3)
+                        .fill({
+                            title: "Bancarios",
+                            icon: <CreditCard />,
+                            desc: "No tengo mucho texto por ahora",
+                            ubi: "Local #etc",
+                        })
+                        .map(({ title, icon, desc, ubi }) => (
+                            <article class="flex flex-col bg-white rounded-3xl shadow">
+                                <header class="px-6 py-8 sm:p-10 sm:pb-6">
+                                    <div class="grid items-center justify-center w-full grid-cols-1 text-left">
+                                        <section>
+                                            <h2 class="text-lg font-medium tracking-tighter text-black lg:text-3xl">
+                                                {title}
+                                            </h2>
+                                            <p class="mt-2 text-sm text-zinc-700">
+                                                {desc}
+                                            </p>
+                                        </section>
+                                        <section class="mt-6">
+                                            <p>
+                                                <span class="text-5xl font-light tracking-tight text-black">
+                                                    {icon}
+                                                </span>
+                                                <span class="text-base font-medium text-black">
+                                                    {ubi}
+                                                </span>
+                                            </p>
+                                        </section>
+                                    </div>
+                                </header>
+                                <footer class="flex px-6 pb-8 sm:px-8">
+                                    <a
+                                        aria-describedby="tier-starter"
+                                        class="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full inline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black"
+                                        href="#"
+                                    >
+                                        Conocer
+                                    </a>
+                                </footer>
+                            </article>
+                        ))
+                }
+            </div>
+        </div>
+        <!-- <article class="flex justify-center gap-8">
+            <div
+                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
+            >
+                <h4>Lorem, ipsum.</h4>
+            </div>
+            <div
+                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
+            >
+                <h4>Lorem, ipsum.</h4>
+            </div>
+            <div
+                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
+            >
+                <h4>Lorem, ipsum.</h4>
+            </div>
+        </article> -->
     </section>
 </main>
