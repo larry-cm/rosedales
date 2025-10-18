@@ -60,7 +60,7 @@ import { type ServiceOffer } from "../type/global";
     <section class="mt-20">
         <article class="p-4 text-center">
             <h2 class="text-4xl font-light mb-4">
-                <b class="font-semibold tracking-wider"> Explora nuestros</b> principales
+                <b class="font-semibold tracking-wider"> Explora nuestros</b>
                 almacenes
             </h2>
         </article>
@@ -109,7 +109,7 @@ import { type ServiceOffer } from "../type/global";
             Manejamos <strong class="font-semibold">gran variedad</strong> en productos
         </h3>
 
-        <div class="flex flex-col lg:flex-row gap-12 md:gap-6 p-4">
+        <div class="flex flex-col lg:flex-row gap-6 p-4">
             <Slide
                 videoMp4s={[
                     { url: videoMp4, alt: "primer video de la semana" },
@@ -146,9 +146,9 @@ import { type ServiceOffer } from "../type/global";
                 calidad
             </h3>
         </article>
-        <article class="flex flex-col md:flex-row mt-12">
+        <article class="relative flex flex-col lg:flex-row gap-6 mt-12">
             <div
-                class="*:text-xl md:*:text-2xl *:leading-relaxed text-white space-y-[1lh]"
+                class="*:text-xl md:*:text-2xl *:leading-relaxed text-white space-y-[1lh] lg:w-2/3"
             >
                 <p>
                     Somos un centro comercial comprometido con ofrecer una
@@ -161,9 +161,15 @@ import { type ServiceOffer } from "../type/global";
                     pensados para satisfacer cada una de tus necesidades.
                 </p>
             </div>
-
-            <div class="md:min-w-xs lg:min-w-xl grid place-content-center">
-                <ShoppingBag className="size-60 animate-bounce  text-white" />
+            <div class="grid gap-6 w-full md:w-2/3 md:mx-auto lg:w-1/3">
+                <Image
+                    width={2}
+                    height={2}
+                    loading="lazy"
+                    src="https://portales.vanguardia.com/sites/default/files/foto_interna/2018/09/17/web_whatsapp_ima_wide_c_5.jpg"
+                    alt="imagen de la entrada de nuestro centro comercial"
+                    class="h-full w-full rounded-2xl object-cover object-top shadow"
+                />
             </div>
         </article>
 
