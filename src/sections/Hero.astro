@@ -31,6 +31,24 @@ import { type ServiceOffer } from "../type/global";
     }
 </style>
 
+<style>
+    .animation-slide-right {
+        animation: slideRight auto linear;
+
+        animation-timeline: view();
+        animation-range: entry 20% cover 30%;
+    }
+    @keyframes slideRight {
+        0% {
+            opacity: 0;
+            transform: translateX(90px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+</style>
 <main>
     <!-- carousel -->
     <section class="relative">
@@ -66,7 +84,7 @@ import { type ServiceOffer } from "../type/global";
             </h2>
         </article>
         <section
-            class="p-4 grid lg:w-full lg:max-w-6xl mx-auto items-center grid-cols-1 xl:grid-cols-3 gap-4 justify-evenly"
+            class="p-4 grid lg:w-full lg:max-w-6xl mx-auto items-center grid-cols-1 lg:grid-cols-3 gap-4 justify-evenly"
         >
             {
                 IMAGES.concat(IMAGES)
@@ -86,7 +104,7 @@ import { type ServiceOffer } from "../type/global";
                                     class="h-44 w-auto aspect-video  md:w-full object-cover"
                                 />
                                 <i class="absolute top-4 right-4 text-white bg-zinc-700/70 group-hover/link:bg-zinc-700/80 transition-colors duration-300 cursor-pointer shadow px-2 py-1.5 rounded-xl flex justify-center items-center">
-                                    <ExternalLink className=" size-6" />
+                                    <ExternalLink className="size-6" />
                                 </i>
                             </a>
                             <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
@@ -103,14 +121,16 @@ import { type ServiceOffer } from "../type/global";
         </section>
     </section>
     <!-- algunos locales -->
-    <section class="mt-14 py-12 rounded-tl-[230px_130px] bg-green-500 px-4">
+    <section
+        class="mt-14 pb-4 pt-16 lg:py-12 rounded-tl-[230px_130px] bg-green-500 px-4"
+    >
         <h3
             class="mb-4 p-4 pt-14 md:p-8 text-4xl font-normal text-pretty text-center text-white tracking-wider"
         >
             Manejamos <strong class="font-semibold">gran variedad</strong> en productos
         </h3>
 
-        <div class="flex flex-col lg:flex-row gap-6 p-4">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-6 p-4">
             <Slide
                 videoMp4s={[
                     { url: videoMp4, alt: "primer video de la semana" },
@@ -123,7 +143,7 @@ import { type ServiceOffer } from "../type/global";
                 client:visible
             />
             <article
-                class="mx-auto md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 my-auto"
+                class="mx-auto md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 md:my-auto"
             >
                 <Image
                     width={200}
@@ -139,7 +159,7 @@ import { type ServiceOffer } from "../type/global";
     <!-- algo sobre el centro comercial -->
     <section class="bg-green-500 p-8 rounded-bl-[230px_130px]">
         <article>
-            <h3 class="text-4xl font-normal text-white">
+            <h3 class="text-4xl font-normal text-white text-pretty text-center">
                 Contamos con <strong class="font-semibold"
                     >zona de relajación</strong
                 >, <strong class="font-semibold">parqueadero</strong> y
@@ -149,11 +169,11 @@ import { type ServiceOffer } from "../type/global";
         </article>
         <article class="relative flex flex-col lg:flex-row gap-6 mt-12">
             <div
-                class="*:text-xl md:*:text-2xl *:leading-relaxed text-white space-y-[1lh] lg:w-2/3"
+                class="*:text-xl md:*:text-2xl *:leading-relaxed text-pretty text-zinc-100 space-y-[1lh] lg:w-2/3"
             >
                 <p>
                     Somos un centro comercial comprometido con ofrecer una
-                    <b>experiencia segura y gratificante</b>
+                    <b class="text-white">experiencia segura y gratificante</b>
                     , moderna y de alta calidad.
                 </p>
                 <p>
@@ -169,7 +189,7 @@ import { type ServiceOffer } from "../type/global";
                     loading="lazy"
                     src="https://portales.vanguardia.com/sites/default/files/foto_interna/2018/09/17/web_whatsapp_ima_wide_c_5.jpg"
                     alt="imagen de la entrada de nuestro centro comercial"
-                    class="h-full w-full rounded-2xl object-cover object-top shadow"
+                    class="h-full w-full rounded-2xl object-cover object-top animation-slide-right shadow drop-shadow-xl drop-shadow-black/20"
                 />
             </div>
         </article>
