@@ -32,11 +32,12 @@ import { type ServiceOffer } from "../type/global";
 </style>
 
 <style>
+    /* No iniciar la animación automáticamente: se activa al entrar en viewport */
     .animation-slide-right {
-        animation: slideRight auto linear;
-
-        animation-timeline: view();
-        animation-range: entry 20% cover 30%;
+        will-change: transform, opacity;
+    }
+    .animation-slide-right.in-view {
+        animation: slideRight 1s linear both;
     }
     @keyframes slideRight {
         0% {
@@ -189,7 +190,7 @@ import { type ServiceOffer } from "../type/global";
                     loading="lazy"
                     src="https://portales.vanguardia.com/sites/default/files/foto_interna/2018/09/17/web_whatsapp_ima_wide_c_5.jpg"
                     alt="imagen de la entrada de nuestro centro comercial"
-                    class="h-full w-full rounded-2xl object-cover object-top animation-slide-right shadow drop-shadow-xl drop-shadow-black/20"
+                    class="h-full w-full rounded-2xl object-cover object-top animation-slide-right opacity-0 shadow drop-shadow-xl drop-shadow-black/20"
                 />
             </div>
         </article>
@@ -265,3 +266,37 @@ import { type ServiceOffer } from "../type/global";
         </article> -->
     </section>
 </main>
+
+<script>
+    // IntersectionObserver para activar animaciones cuando los elementos entran al viewport
+    if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+        const prefersReduce = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                for (const entry of entries) {
+                    const el = entry.target;
+                    if (!(el instanceof HTMLElement)) continue;
+                    if (entry.isIntersecting) {
+                        // añadir la clase y dejar de observar (disparo único)
+                        el.classList.add("in-view");
+                        obs.unobserve(el);
+                    }
+                }
+            },
+            { threshold: 0.35 },
+        );
+
+        // Observar elementos relevantes
+        document.querySelectorAll(".animation-slide-right").forEach((el) => {
+            if (prefersReduce) el.classList.add("in-view");
+            else observer.observe(el);
+        });
+    } else {
+        // si no hay IntersectionObserver, activamos estados finales
+        document
+            .querySelectorAll(".animation-slide-right")
+            .forEach((el) => el.classList.add("in-view"));
+    }
+</script>
