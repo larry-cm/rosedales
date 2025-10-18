@@ -9,7 +9,7 @@ export interface UseCarousel {
 export default function useCarousel({ autoSlideInterval, autoSlide, slides, visibleSlides = 1 }: UseCarousel) {
     const [position, setPosition] = useState(0)
     // cada slide visible ocupa 100 / visibleSlides % del ancho del contenedor
-    const constPorcent = 100 / visibleSlides
+    const constPercent = 100 / visibleSlides
     // la máxima posición de inicio es tal que queden visibleSlides elementos en pantalla
     const maxPosition = Math.max(0, (slides?.length || 0) - visibleSlides)
 
@@ -50,5 +50,5 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
         startInterval()
         return () => resetInterval()
     }, [])
-    return { handleNextClick, handlePrevClick, moveToSlide, position, constPorcent, maxPosition }
+    return { handleNextClick, handlePrevClick, moveToSlide, position, constPercent, maxPosition }
 }
