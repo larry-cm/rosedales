@@ -15,6 +15,7 @@ import Image from "astro/components/Image.astro";
 import { type ServiceOffer } from "../type/global";
 ---
 
+<!-- animación para el texto que aparece hacia abajo -->
 <style>
     .animation-go-text {
         animation: animationText 1s ease;
@@ -31,8 +32,8 @@ import { type ServiceOffer } from "../type/global";
     }
 </style>
 
+<!-- No se inicia la animación automáticamente: se activa al entrar en viewport -->
 <style>
-    /* No iniciar la animación automáticamente: se activa al entrar en viewport */
     .animation-slide-right {
         will-change: transform, opacity;
     }
@@ -50,6 +51,7 @@ import { type ServiceOffer } from "../type/global";
         }
     }
 </style>
+
 <main>
     <!-- carousel -->
     <section class="relative">
@@ -267,8 +269,8 @@ import { type ServiceOffer } from "../type/global";
     </section>
 </main>
 
+<!-- IntersectionObserver para activar animaciones cuando los elementos entran al viewport -->
 <script>
-    // IntersectionObserver para activar animaciones cuando los elementos entran al viewport
     if (typeof window !== "undefined" && "IntersectionObserver" in window) {
         const prefersReduce = window.matchMedia(
             "(prefers-reduced-motion: reduce)",
