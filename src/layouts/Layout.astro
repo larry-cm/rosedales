@@ -1,5 +1,6 @@
 ---
 import { URL_LOGO } from "../services/constantes.js";
+import Header from "../sections/Header.astro";
 // SITE_URL should be set in your environment for build (e.g. import.meta.env.SITE_URL)
 const SITE_URL = (import.meta.env && import.meta.env.SITE_URL) || '{SITE_URL}';
 const title = 'Centro Comercial Rosedal. | Bucaramanga';
@@ -12,7 +13,7 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/icon-rosedal.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
@@ -58,6 +59,7 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 		</script>
 	</head>
 	<body class="relative">
+  <Header logoUrl="/image/rosedal-logo.svg" />
 		<slot />
 	</body>
 </html>
