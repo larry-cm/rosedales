@@ -9,10 +9,17 @@ import {
 } from "react-feather";
 import Carousel from "../components/Carousel";
 import { IMAGES, URL_LOGO } from "../services/constantes.js";
-import Slide from "../components/Slide";
 import videoMp4 from "../assets/videos/videosCarousel.mp4";
 import Image from "astro/components/Image.astro";
 import { type ServiceOffer } from "../type/global";
+const vi = [
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+];
 ---
 
 <!-- animación para el texto que aparece hacia abajo -->
@@ -56,7 +63,13 @@ import { type ServiceOffer } from "../type/global";
     <!-- carousel -->
     <section class="relative">
         <div class="bg-green-500">
-            <Carousel autoSlide slides={IMAGES} client:visible />
+            <Carousel
+                type="img"
+                autoSlide
+                slides={IMAGES}
+                visibleSlides={1}
+                client:visible
+            />
             <article class="py-2 px-4">
                 <h2
                     class="animation-go-text text-4xl text-white font-medium capitalize text-center mb-20 mt-16"
@@ -134,19 +147,15 @@ import { type ServiceOffer } from "../type/global";
         </h3>
 
         <div class="flex flex-col lg:flex-row gap-12 lg:gap-6 p-4">
-            <Slide
-                videoMp4s={[
-                    { url: videoMp4, alt: "primer video de la semana" },
-                    { url: videoMp4, alt: "primer video de la semana" },
-                    { url: videoMp4, alt: "primer video de la semana" },
-                    { url: videoMp4, alt: "primer video de la semana" },
-                    { url: videoMp4, alt: "primer video de la semana" },
-                    { url: videoMp4, alt: "primer video de la semana" },
-                ]}
+            <Carousel
+                type="mp4"
+                style="rounded-2xl"
+                autoSlide
+                slides={vi}
                 client:visible
             />
             <article
-                class="mx-auto md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 md:my-auto"
+                class="mx-auto select-none md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 md:my-auto"
             >
                 <Image
                     width={200}

@@ -1,7 +1,6 @@
-import type { MoveToSlide } from "../hooks/useCarousel";
 interface TypePointsSlides {
     maxPosition: number,
-    moveToSlide: ({ position }: MoveToSlide) => void,
+    moveToSlide: ({ position }: { position: number }) => void,
     position: number
 }
 export default function PointsSlides({ maxPosition, moveToSlide, position }: TypePointsSlides) {

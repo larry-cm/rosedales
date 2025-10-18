@@ -1,27 +1,37 @@
-import useCarousel, { type UseCarousel } from "../hooks/useCarousel";
+import useCarousel from "../hooks/useCarousel";
 import PointsSlides from "./PointsSlides";
+import { type UseCarousel } from "../type/global";
 import { ChevronsCarousel } from "./ChevronsCarousel";
 export default function Carousel({
   slides,
   autoSlide = false,
   autoSlideInterval = 5000,
-  visibleSlides = 1,
+  type,
+  visibleSlides,
+  style
 }: UseCarousel) {
 
-  const { handleNextClick, handlePrevClick, moveToSlide, position, constPercent, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
+  const { handleNextClick, handlePrevClick, moveToSlide, visibleSlidesMacro, translatePx, position, trackRef, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
+
+  const TYPES_SLIDES = {
+    img: (slides && slides.map(({ url: slide, alt }, i) => (
+      <img key={i} alt={alt} className="h-[83svh] object-cover" style={{ minWidth: `${100 / visibleSlidesMacro}%` }} src={slide} />
+    ))),
+    mp4: slides && slides.map(({ url, alt }, i) => (
+      <video key={i} src={url} title={alt} className="rounded-2xl" autoPlay loop muted style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></video>)
+    )
+  }
 
   return (
     <div
-      className="overflow-hidden z-10 relative no-rounded-transition">
-      <div className="flex transition-transform duration-700 ease-in-out "
+      className={`overflow-hidden z-10 relative flex-1 no-rounded-transition ${style}`}>
+      <div ref={trackRef} className="flex transition-transform duration-700 ease-in-out gap-6"
         style={{
-          transform: `translateX(-${position * constPercent}%)`
+          transform: `translateX(calc(-${translatePx}px))`
         }}
       >
         {
-          slides && slides.map(({ url: slide, alt }, i) => (
-            <img key={i} alt={alt} className="h-[83svh] object-cover" style={{ minWidth: `${100 / visibleSlides}%` }} src={slide} />
-          ))
+          type && TYPES_SLIDES[type]
         }
       </div>
 
