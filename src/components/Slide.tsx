@@ -77,7 +77,7 @@ export default function Slide({ videoMp4s }: { videoMp4s: TypeMp4 }) {
 
     return (
         <article className="relative overflow-hidden flex-1 w-full rounded-2xl">
-            <div ref={trackRef} className="flex h-full transition-transform duration-700 ease-in-out gap-4" style={{ transform: `translateX(-${translatePx}px)` }}>
+            <div ref={trackRef} className="flex h-full transition-transform duration-700 ease-in-out gap-6" style={{ transform: `translateX(-${translatePx}px)` }}>
                 {
                     videoMp4s && videoMp4s.map(({ url: videoMp4, alt }, i) => (
                         <div key={i} style={{ minWidth: `${100 / visibleSlides}%` }} className="overflow-hidden rounded-xl shadow-lg h-full">
