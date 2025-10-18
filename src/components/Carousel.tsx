@@ -1,7 +1,6 @@
 import useCarousel, { type UseCarousel } from "../hooks/useCarousel";
-import { ChevronLeft, ChevronRight } from "react-feather";
 import PointsSlides from "./PointsSlides";
-
+import { ChevronsCarousel } from "./ChevronsCarousel";
 export default function Carousel({
   slides,
   autoSlide = false,
@@ -9,32 +8,24 @@ export default function Carousel({
   visibleSlides = 1,
 }: UseCarousel) {
 
-  const { handleNextClick, handlePrevClick, moveToSlide, position, constPorcent, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
+  const { handleNextClick, handlePrevClick, moveToSlide, position, constPercent, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
 
   return (
     <div
       className="overflow-hidden z-10 relative no-rounded-transition">
       <div className="flex transition-transform duration-700 ease-in-out "
         style={{
-          transform: `translateX(-${position * constPorcent}%)`
+          transform: `translateX(-${position * constPercent}%)`
         }}
       >
         {
           slides && slides.map(({ url: slide, alt }, i) => (
-            // Cada slide ocupa (100 / visibleSlides) % del contenedor
             <img key={i} alt={alt} className="h-[83svh] object-cover" style={{ minWidth: `${100 / visibleSlides}%` }} src={slide} />
           ))
         }
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-between p-4">
-        <button onClick={handlePrevClick} className="focus:ring ring-green-500 cursor-pointer rounded-full shadow">
-          <ChevronLeft className="block btn-effect hover:bg-white/70 backdrop-blur-md bg-green-500 stroke-white rounded-full size-8 sm:10 md:size-12 hover:stroke-green-500  transition duration-300" size={24} strokeWidth="2" />
-        </button>
-        <button onClick={handleNextClick} className="focus:ring ring-green-500 cursor-pointer rounded-full shadow">
-          <ChevronRight className="block btn-effect hover:bg-white/70 backdrop-blur-md bg-green-500 stroke-white rounded-full size-8 sm:10 md:size-12 hover:stroke-green-500 scale-100 transition duration-300" size={24} strokeWidth="2" />
-        </button>
-      </div>
+      <ChevronsCarousel handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
 
       <PointsSlides maxPosition={maxPosition} moveToSlide={moveToSlide} position={position} />
     </div>

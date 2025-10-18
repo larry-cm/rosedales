@@ -4,3 +4,7 @@ export interface ServiceOffer {
     desc: string;
     ubi: string;
 }
+export interface TypeChevronsCarousel {
+    handlePrevClick: () => void;
+    handleNextClick: () => void;
+}
