@@ -30,6 +30,7 @@ import { type ServiceOffer } from "../type/global";
         }
     }
 </style>
+
 <main>
     <!-- carousel -->
     <section class="relative">
@@ -57,7 +58,7 @@ import { type ServiceOffer } from "../type/global";
         </article>
     </section>
     <!-- locales principales -->
-    <section class="mt-20">
+    <section class="mt-16">
         <article class="p-4 text-center">
             <h2 class="text-4xl font-light mb-4">
                 <b class="font-semibold tracking-wider"> Explora nuestros</b>
@@ -65,13 +66,13 @@ import { type ServiceOffer } from "../type/global";
             </h2>
         </article>
         <section
-            class="p-4 grid max-w-4xl mx-auto grid-cols-1 md:grid-cols-3 gap-6"
+            class="p-4 grid lg:w-full lg:max-w-6xl mx-auto items-center grid-cols-1 xl:grid-cols-3 gap-4 justify-evenly"
         >
             {
                 IMAGES.concat(IMAGES)
                     .slice(0, 3)
                     .map((img) => (
-                        <div>
+                        <article>
                             <a
                                 href={img.slug}
                                 class=" group/link shadow overflow-hidden relative flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
@@ -88,15 +89,15 @@ import { type ServiceOffer } from "../type/global";
                                     <ExternalLink className=" size-6" />
                                 </i>
                             </a>
-                            <article class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
+                            <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
                                 <h3 class="text-2xl font-semibold tracking-wide">
                                     Lorem ipsum dolor sit
                                 </h3>
                                 <a href={img.slug} class="underline text-lg">
                                     Ir a conocer mas.
                                 </a>
-                            </article>
-                        </div>
+                            </div>
+                        </article>
                     ))
             }
         </section>
