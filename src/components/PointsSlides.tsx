@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-import type { MoveToSlide } from "../hooks/useCarousel";
-import { ChevronRight,ChevronLeft } from "react-feather"
-
-interface TypePointsSlides {
-    maxPosition: number,
-    moveToSlide: ({ position }: MoveToSlide) => void,
-    position: number,
-    handlePrevClick:()=> void,
-    handleNextClick:()=>void
-=======
+import { ChevronLeft,ChevronRight } from "react-feather"
 interface TypePointsSlides {
     maxPosition: number,
     moveToSlide: ({ position }: { position: number }) => void,
     position: number
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
+    handlePrevClick:()=>void,
+    handleNextClick:()=>void
 }
 export default function PointsSlides({handlePrevClick,handleNextClick,moveToSlide, maxPosition, position }: TypePointsSlides) {
     return (
-
         <>
         <div className="absolute inset-0 flex items-center justify-between p-4">
                 <button onClick={handlePrevClick} className="focus:ring ring-primary cursor-pointer   rounded-full shadow">

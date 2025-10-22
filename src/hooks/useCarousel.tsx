@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
 export type MoveToSlide = { position: number }
 export interface UseCarousel {
     autoSlide?: boolean,
@@ -21,21 +20,6 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides}: Use
     const trackRef = useRef<HTMLDivElement | null>(null)
     
 
-=======
-import { type UseCarousel } from "../type/global";
-export default function useCarousel({ autoSlideInterval, autoSlide, slides, visibleSlides }: UseCarousel) {
-    const trackRef = useRef<HTMLDivElement | null>(null)
-    const [translatePx, setTranslatePx] = useState(0)
-
-    const [trackWidth, setTrackWidth] = useState(0)
-    const visibleSlidesMacro = visibleSlides || trackWidth <= 900 ? 1 : 3
-
-    const [position, setPosition] = useState(0)
-    // cada slide visible ocupa 100 / visibleSlides % del ancho del contenedor
-    const constPercent = 100 / visibleSlidesMacro
-    // la máxima posición de inicio es tal que queden visibleSlides elementos en pantalla
-    const maxPosition = Math.max(0, (slides?.length || 0) - visibleSlidesMacro)
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
 
     // auto slide
     const slideInterval = useRef<NodeJS.Timeout | number>(0)
@@ -74,12 +58,8 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
         startInterval()
         return () => resetInterval()
     }, [])
-<<<<<<< HEAD
     
     // mover con el necesario
-=======
-
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
     const computeTranslate = () => {
         const track = trackRef.current
         if (!track) return
@@ -88,18 +68,10 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
         const gapStr = cs.gap || (cs as any).columnGap || "0px"
         const gapPx = parseFloat(gapStr) || 0
 
-<<<<<<< HEAD
         const itemWidth = first ? first.getBoundingClientRect().width : (track.clientWidth / visibleSlides)
         const step = itemWidth + gapPx
         setTranslatePx(Math.round(position * step))
     }
-=======
-        const itemWidth = first ? first.getBoundingClientRect().width : (track.clientWidth / visibleSlidesMacro)
-        const step = itemWidth + gapPx
-        setTranslatePx(Math.round(position * step))
-    }
-    // auto slide
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
     useEffect(() => {
         computeTranslate()
         const track = trackRef.current
@@ -121,12 +93,7 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
             }
         }
     }, [position, slides])
-<<<<<<< HEAD
     // veo el ancho de la pantalla para cambiar la cantidad de items
-=======
-
-    // modifico la cantidad de vistas 
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
     useEffect(() => {
         const updateWidth = () => {
             if (document.body) {
@@ -150,10 +117,6 @@ export default function useCarousel({ autoSlideInterval, autoSlide, slides, visi
             }
         }
     }, [])
-<<<<<<< HEAD
 
     return { handleNextClick, handlePrevClick, moveToSlide, position, constPorcent, maxPosition ,trackRef,translatePx}
-=======
-    return { handleNextClick, handlePrevClick, moveToSlide, visibleSlidesMacro, translatePx, trackRef, position, constPercent, maxPosition }
->>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
 }
