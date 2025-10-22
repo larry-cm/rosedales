@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type { MoveToSlide } from "../hooks/useCarousel";
 import { ChevronRight,ChevronLeft } from "react-feather"
 
@@ -7,6 +8,12 @@ interface TypePointsSlides {
     position: number,
     handlePrevClick:()=> void,
     handleNextClick:()=>void
+=======
+interface TypePointsSlides {
+    maxPosition: number,
+    moveToSlide: ({ position }: { position: number }) => void,
+    position: number
+>>>>>>> b91490bf25fb1ff94792244f90729b0a3b81befb
 }
 export default function PointsSlides({handlePrevClick,handleNextClick,moveToSlide, maxPosition, position }: TypePointsSlides) {
     return (
