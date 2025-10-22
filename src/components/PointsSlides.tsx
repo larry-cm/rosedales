@@ -1,12 +1,26 @@
 import type { MoveToSlide } from "../hooks/useCarousel";
+import { ChevronRight,ChevronLeft } from "react-feather"
+
 interface TypePointsSlides {
     maxPosition: number,
     moveToSlide: ({ position }: MoveToSlide) => void,
-    position: number
+    position: number,
+    handlePrevClick:()=> void,
+    handleNextClick:()=>void
 }
-export default function PointsSlides({ maxPosition, moveToSlide, position }: TypePointsSlides) {
+export default function PointsSlides({handlePrevClick,handleNextClick,moveToSlide, maxPosition, position }: TypePointsSlides) {
     return (
-        <div className=" absolute bottom-4 right-0 left-0">
+
+        <>
+        <div className="absolute inset-0 flex items-center justify-between p-4">
+                <button onClick={handlePrevClick} className="focus:ring ring-primary cursor-pointer   rounded-full shadow">
+                  <ChevronLeft className="block btn-effect bg-white/70 backdrop-blur-md rounded-full md:size-12 stroke-primary  transition duration-300" size={24} strokeWidth="1.5" />
+                </button>
+                <button onClick={handleNextClick} className="focus:ring ring-primary cursor-pointer   rounded-full shadow">
+                  <ChevronRight className="block btn-effect bg-white/70 backdrop-blur-md rounded-full md:size-12 stroke-primary scale-100 transition duration-300" size={24} strokeWidth="1.5" />
+                </button>
+              </div>
+              <div className=" absolute bottom-4 right-0 left-0">
             <div className="flex items-center justify-center gap-2 h-8 backdrop-blur-md bg-white/70 rounded-full shadow min-w-28 w-fit mx-auto px-2 py-0.5" >
                 {
                     Array.from({ length: maxPosition + 1 }).map((_, i) => (
@@ -18,5 +32,7 @@ export default function PointsSlides({ maxPosition, moveToSlide, position }: Typ
                 }
             </div>
         </div>
+        </>
+        
     )
 }
