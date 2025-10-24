@@ -4,6 +4,10 @@
     --color-primary: #45ac00;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .btn-effect {
     &:active {
         transform: scale(0.95);

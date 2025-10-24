@@ -1,6 +1,6 @@
 ---
 import { Facebook, Instagram, Linkedin, Menu } from "react-feather";
-import { URL_LOGO, LINK_PAGE, SOCIAL_MEDIA } from "../services/constantes";
+import { LINK_PAGE, SOCIAL_MEDIA, URL_LOGO } from "../services/constantes";
 import Image from "astro/components/Image.astro";
 interface Props {
   socialMedia?: Element[];
@@ -39,7 +39,7 @@ const {
     </nav>
     <!-- menu inicial -->
     <ul
-      class="hidden lg:flex items-center justify-center gap-8 list-none text-lg text-xl font-semibold"
+      class="hidden lg:flex items-center justify-center gap-8 list-none text-lg sm:text-xl font-semibold"
     >
       {
         urls &&
@@ -47,7 +47,7 @@ const {
             <li>
               <a
                 class="capitalize hover:text-primary transition duration-300"
-                href={enlace.toLowerCase()}
+                href={`#${enlace.toLowerCase()}`}
                 title={enlace.toUpperCase()[0] + enlace.slice(1)}
               >
                 {enlace}

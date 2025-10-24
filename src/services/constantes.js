@@ -1,9 +1,19 @@
+import videoMp4 from "../assets/videos/videosCarousel.mp4";
+
 // constantes del header
-export const LINK_PAGE = ["Eventos", "Promociones", "Locales", "Contáctenos"]
+export const LINK_PAGE = ["Promociones", "Locales", "Contáctenos"]
 export const SOCIAL_MEDIA = ["Facebook", "Instagram", "LinkedIn"]
-export const URL_LOGO = "https://canaveral.com.co/wp-content/uploads/2024/10/logo-cana.jpeg"
+export const URL_LOGO = "/rosedal-logo.svg"
 // constantes del carrusel
-const URLS_IMAGES = new Array(10).fill("/image.webp")
+export const vi = [
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+    { url: videoMp4, alt: "primer video de la semana" },
+];
+const URLS_IMAGES = new Array(10).fill("/image/image.webp")
 const ALTERNATIVE_TEXT_IMAGES = new Array(10).fill(null).map((_, i) => `Imagen del local numero ${i} en el centro comercial`)
 const SLUGS_IMAGES = new Array(10).fill(null).map((_, i) => `local-${i + 1}`)
 
@@ -14,3 +24,10 @@ export const IMAGES = [URLS_IMAGES, ALTERNATIVE_TEXT_IMAGES, SLUGS_IMAGES].map((
     slug: SLUGS_IMAGES[i],
 })
 )
+export const SERVICIOS = (icon) => Array(3).fill({
+    title: 'Bancos',
+    desc: 'Somos los mejores bancos del mundo mundial',
+    icon: icon,
+    ubi: 'cra19 # 39-25',
+    url: 'no tengo'
+})

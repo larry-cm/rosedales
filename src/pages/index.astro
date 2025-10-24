@@ -1,9 +1,13 @@
 ---
-import Hero from "../sections/Hero.astro";
 import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
+import "@styles/global.css";
+import Hero from "@sections/Hero.astro";
+import Nosotros from "@sections/Nosotros.astro";
+import Categories from "@sections/Categories.astro";
 ---
 
 <Layout>
   <Hero />
+  <Categories />
+  <Nosotros />
 </Layout>

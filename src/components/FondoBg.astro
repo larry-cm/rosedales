@@ -1,0 +1,11 @@
+---
+interface Props {
+    position?: string;
+}
+const { position = "top-3 left-3" } = Astro.props;
+---
+
+<i
+    class={`-z-10 absolute opacity-50 ${position} bg-[url(/icon-rosedal.svg)] bg-no-repeat bg-contain bg-center size-40 scale-300 lg:scale-400 -rotate-z-12 select-none block`}
+>
+</i>

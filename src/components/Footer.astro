@@ -1,0 +1,94 @@
+---
+import { Facebook, Instagram, Linkedin } from "react-feather";
+import { SOCIAL_MEDIA } from "../services/constantes";
+interface Props {
+    socialMedia?: Element[];
+}
+const { socialMedia = [Facebook, Instagram, Linkedin] } = Astro.props;
+---
+
+<section class="flex flex-col md:flex-row sm:gap-44 gap-6 p-8">
+    <article class="flex-1 order-2 md:order-1">
+        <h6
+            class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize"
+        >
+            Acerca de nosotros
+        </h6>
+        <p class="text-lg space-y-[1lh] text-zinc-700 my-6">
+            Somos un centro comercial comprometido con tu bienestar y comodidad.
+            Nuestra misión es ofrecer un espacio seguro y agradable donde
+            encuentres una cuidada selección de tiendas, servicios y actividades
+            para toda la familia.
+        </p>
+        <h6
+            class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize mb-4"
+        >
+            Políticas de tratamiento de la información
+        </h6>
+        <div class="flex gap-6 border-b-3 pb-4">
+            <h6
+                class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize"
+            >
+                Síguenos
+            </h6>
+            <ul class="flex items-center text-zinc-700 gap-6">
+                {
+                    socialMedia &&
+                        socialMedia.map((MyIcon: any, i: number) => (
+                            <a
+                                href={SOCIAL_MEDIA[i].toLowerCase()}
+                                title={SOCIAL_MEDIA[i]}
+                                name={SOCIAL_MEDIA[i]}
+                                aria-label={`Enlace a ${SOCIAL_MEDIA[i]}`}
+                                aria-labelledby="Enlace para las redes sociales"
+                            >
+                                <MyIcon
+                                    className={`${i === 1 ? "text-zinc-700" : "text-zinc-700 fill-zinc-700"} fill-white  size-5 transition duration-200`}
+                                />
+                            </a>
+                        ))
+                }
+            </ul>
+        </div>
+        <p class="text-center mt-10">
+            Copyright©2025. Todos los derechos reservados. / Desarrollado por
+            <a
+                href="https://github.com/larry-cm"
+                rel="noreferrer noopener"
+                target="_blank"
+                class="font-semibold text-green-500 hover:text-green-600 transition"
+                >larry ceballos</a
+            >
+        </p>
+    </article>
+    <article class="order-1 md:order-2">
+        <h6
+            class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize mb-6"
+        >
+            contáctenos
+        </h6>
+        <div class="flex flex-col">
+            <strong class="font-semibold text-lg"
+                >Rosedal Centro Comercial</strong
+            >
+            <address class="flex flex-col not-italic">
+                <span><strong>Cl del Comercio</strong> #18-65</span>
+                <span
+                    ><strong>Centro</strong> - <strong>Bucaramanga</strong> - Santander</span
+                >
+                <strong>Horario Comercial:</strong>
+                <p>Lunes a Viernes am. - 6:00 pm.</p>
+                <p>sábado 9:00 am. - 5:00 pm.</p>
+                <p>76336396</p>
+                <p>servicioalcliente@rosedal.com</p>
+            </address>
+            <address class="not-italic mt-6">
+                <strong> Horario oficina de administración: </strong>
+                <p>Lunes a viernes: 8:00 a.m. a 6:00 p.m.</p>
+                <p>Sábados: 8:30 a.m. a 12:00 m.</p>
+                <p><b>+57</b> 318 901 5715</p>
+                <p>mercadeo@cccanaveral.net</p>
+            </address>
+        </div>
+    </article>
+</section>

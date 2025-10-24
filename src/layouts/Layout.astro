@@ -1,6 +1,8 @@
 ---
 import { URL_LOGO } from "../services/constantes.js";
-import Header from "../sections/Header.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
 // SITE_URL should be set in your environment for build (e.g. import.meta.env.SITE_URL)
 const SITE_URL = (import.meta.env && import.meta.env.SITE_URL) || '{SITE_URL}';
 const title = 'Centro Comercial Rosedal. | Bucaramanga';
@@ -59,8 +61,12 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 		</script>
 	</head>
 	<body class="relative">
- 		 <Header logoUrl="/image/rosedal-logo.svg" />
-		<slot />
+ 		<Header  />
+		 <main>
+			<slot />
+		</main>
+  <Footer />
+
 	</body>
 </html>
 
@@ -90,7 +96,6 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 	body {
 		margin: 0;
 		width: 100%;
-		overflow-x: hidden;
 		font-family:
 			"Noha-Head",
 			system-ui,

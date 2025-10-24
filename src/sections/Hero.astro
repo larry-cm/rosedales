@@ -1,25 +1,13 @@
 ---
-import {
-    CreditCard,
-    DollarSign,
-    ExternalLink,
-    Gift,
-    ShoppingBag,
-    Truck,
-} from "react-feather";
+import { IMAGES } from "../services/constantes.js";
+
+import { Gift } from "react-feather";
 import Carousel from "../components/Carousel";
-import { IMAGES, URL_LOGO } from "../services/constantes.js";
-import videoMp4 from "../assets/videos/videosCarousel.mp4";
+
 import Image from "astro/components/Image.astro";
-import { type ServiceOffer } from "../type/global";
-const vi = [
-    { url: videoMp4, alt: "primer video de la semana" },
-    { url: videoMp4, alt: "primer video de la semana" },
-    { url: videoMp4, alt: "primer video de la semana" },
-    { url: videoMp4, alt: "primer video de la semana" },
-    { url: videoMp4, alt: "primer video de la semana" },
-    { url: videoMp4, alt: "primer video de la semana" },
-];
+import { vi } from "../services/constantes.js";
+import LogoRosedal from "../assets/LogoRosedal.astro";
+import FondoBg from "../components/FondoBg.astro";
 ---
 
 <!-- animación para el texto que aparece hacia abajo -->
@@ -39,275 +27,110 @@ const vi = [
     }
 </style>
 
-<!-- No se inicia la animación automáticamente: se activa al entrar en viewport -->
-<style>
-    .animation-slide-right {
-        will-change: transform, opacity;
-    }
-    .animation-slide-right.in-view {
-        animation: slideRight 1s linear both;
-    }
-    @keyframes slideRight {
-        0% {
-            opacity: 0;
-            transform: translateX(90px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-</style>
-
-<main>
-    <!-- carousel -->
-    <section class="relative">
-        <div class="bg-green-500">
+<!-- primer carousel -->
+<section class="relative">
+    <div class="bg-green-500">
+        <div class="h-45 md:h-[85dvh]">
             <Carousel
                 type="img"
-                autoSlide
                 slides={IMAGES}
                 visibleSlides={1}
+                autoSlide
+                visiblePoints
                 client:visible
             />
-            <article class="py-2 px-4">
-                <h2
-                    class="animation-go-text text-4xl text-white font-medium capitalize text-center mb-20 mt-16"
-                >
-                    Descubre nuestros <strong class="font-semibold"
-                        >almacenes repletos</strong
-                    >
-                    de novedades para ti
-                </h2>
-            </article>
         </div>
 
-        <article
-            class="absolute w-fit bg-zinc-900 shadow rounded-4xl rounded-bl px-6 py-4 -bottom-6 left-0 right-0 mx-auto flex justify-center items-center gap-2"
-        >
-            <span class="text-2xl text-white text-center font-bold">
-                Consigue tus obsequios
-            </span>
-            <Gift className="text-white size-6 hidden sm:block ms-1" />
-        </article>
-    </section>
-    <!-- locales principales -->
-    <section class="mt-16">
-        <article class="p-4 text-center">
-            <h2 class="text-4xl font-light mb-4">
-                <b class="font-semibold tracking-wider"> Explora nuestros</b>
-                almacenes
+        <article class="py-2 px-4">
+            <h2
+                id="promociones"
+                class="animation-go-text text-4xl text-white font-medium capitalize text-center mb-20 mt-14"
+            >
+                <strong class="font-semibold">almacenes repletos</strong>
+                de novedades para ti
             </h2>
         </article>
-        <section
-            class="p-4 grid lg:w-full lg:max-w-6xl mx-auto items-center grid-cols-1 lg:grid-cols-3 gap-4 justify-evenly"
-        >
-            {
-                IMAGES.concat(IMAGES)
-                    .slice(0, 3)
-                    .map((img) => (
-                        <article>
-                            <a
-                                href={img.slug}
-                                class=" group/link shadow overflow-hidden relative flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
-                            >
-                                <Image
-                                    width={200}
-                                    height={200}
-                                    loading="lazy"
-                                    src={img.url}
-                                    alt={img.alt}
-                                    class="h-44 w-auto aspect-video  md:w-full object-cover"
-                                />
-                                <i class="absolute top-4 right-4 text-white bg-zinc-700/70 group-hover/link:bg-zinc-700/80 transition-colors duration-300 cursor-pointer shadow px-2 py-1.5 rounded-xl flex justify-center items-center">
-                                    <ExternalLink className="size-6" />
-                                </i>
-                            </a>
-                            <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
-                                <h3 class="text-2xl font-semibold tracking-wide">
-                                    Lorem ipsum dolor sit
-                                </h3>
-                                <a href={img.slug} class="underline text-lg">
-                                    Ir a conocer mas.
-                                </a>
-                            </div>
-                        </article>
-                    ))
-            }
-        </section>
-    </section>
-    <!-- algunos locales -->
-    <section
-        class="mt-14 pb-4 pt-16 lg:py-12 rounded-tl-[230px_130px] bg-green-500 px-4"
+    </div>
+
+    <article
+        class="absolute w-fit bg-zinc-900 shadow rounded-4xl rounded-bl px-6 py-4 -bottom-6 left-0 right-0 mx-auto flex justify-center items-center gap-2"
     >
-        <h3
-            class="mb-4 p-4 pt-14 md:p-8 text-4xl font-normal text-pretty text-center text-white tracking-wider"
+        <span class="text-2xl text-white text-center font-bold">
+            Consigue tus obsequios
+        </span>
+        <Gift className="text-white size-6 hidden sm:block ms-1" />
+    </article>
+</section>
+<!-- locales principales -->
+<section class="mt-16">
+    <article class="p-4 text-center">
+        <h2 class="text-4xl font-light mb-4">
+            <b class="font-semibold tracking-wider"> Explora nuestros</b>
+            almacenes
+        </h2>
+    </article>
+    <section
+        class="p-8 grid w-full mx-auto items-center grid-cols-1 lg:grid-cols-3 gap-4 justify-evenly"
+    >
+        <!-- cards de locales principales -->
+        {
+            IMAGES.concat(IMAGES)
+                .slice(0, 3)
+                .map(({ slug, url, alt }) => (
+                    <article>
+                        <a
+                            href={slug}
+                            class=" group/link shadow overflow-hidden flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
+                        >
+                            <Image
+                                width={200}
+                                height={200}
+                                loading="lazy"
+                                src={url}
+                                alt={alt}
+                                class="h-44 w-auto aspect-video  md:w-full object-cover"
+                            />
+                        </a>
+                        <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
+                            <h3 class="text-2xl font-semibold tracking-wide">
+                                Lorem ipsum dolor sit
+                            </h3>
+                            <a
+                                href={slug}
+                                class="underline text-lg text-zinc-700 hover:text-green-500  transition duration-200"
+                            >
+                                Ir a conocer mas.
+                            </a>
+                        </div>
+                    </article>
+                ))
+        }
+    </section>
+</section>
+<!-- algunos locales -->
+<section
+    class="m-8 rounded-tl-[130px_130px] z-10 rounded bg-green-500 rounded-br-[130px_130px] p-8 md:p-16 space-y-12 overflow-hidden relative"
+>
+    <FondoBg />
+    <h3
+        class="sm:block text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-6 px-0 hidden"
+    >
+        Manejamos <strong class="font-semibold">gran variedad</strong> en productos
+    </h3>
+
+    <div class="flex items-center flex-col lg:flex-row gap-6 py-6 sm:pb-0">
+        <Carousel
+            type="mp4"
+            style="rounded-2xl order-2 sm:order-1 "
+            slides={vi}
+            autoSlide
+            visiblePoints
+            client:visible
+        />
+        <article
+            class="mx-auto order-1 sm:order-2 select-none md:ms-auto bg-white p-2 rounded-full grid place-content-center size-36 md:my-auto"
         >
-            Manejamos <strong class="font-semibold">gran variedad</strong> en productos
-        </h3>
-
-        <div class="flex flex-col lg:flex-row gap-12 lg:gap-6 p-4">
-            <Carousel
-                type="mp4"
-                style="rounded-2xl"
-                autoSlide
-                slides={vi}
-                client:visible
-            />
-            <article
-                class="mx-auto select-none md:ms-auto bg-white p-2 rounded-full grid place-content-center size-50 md:my-auto"
-            >
-                <Image
-                    width={200}
-                    height={200}
-                    loading="lazy"
-                    src={URL_LOGO || "/image.webp"}
-                    alt="imagen de la entrara del centro comercial"
-                    class="aspect-auto w-64"
-                />
-            </article>
-        </div>
-    </section>
-    <!-- algo sobre el centro comercial -->
-    <section class="bg-green-500 p-8 rounded-bl-[230px_130px]">
-        <article>
-            <h3 class="text-4xl font-normal text-white text-pretty text-center">
-                Contamos con <strong class="font-semibold"
-                    >zona de relajación</strong
-                >, <strong class="font-semibold">parqueadero</strong> y
-                <strong class="font-semibold">productos finos</strong> y de alta
-                calidad
-            </h3>
+            <LogoRosedal fill="black" size={120} />
         </article>
-        <article class="relative flex flex-col lg:flex-row gap-6 mt-12">
-            <div
-                class="*:text-xl md:*:text-2xl *:leading-relaxed text-pretty text-zinc-100 space-y-[1lh] lg:w-2/3"
-            >
-                <p>
-                    Somos un centro comercial comprometido con ofrecer una
-                    <b class="text-white">experiencia segura y gratificante</b>
-                    , moderna y de alta calidad.
-                </p>
-                <p>
-                    Contamos con espacios amplios, atención al cliente
-                    personalizada y una cuidada selección de marcas y productos,
-                    pensados para satisfacer cada una de tus necesidades.
-                </p>
-            </div>
-            <div class="grid gap-6 w-full md:w-2/3 md:mx-auto lg:w-1/3">
-                <Image
-                    width={2}
-                    height={2}
-                    loading="lazy"
-                    src="https://portales.vanguardia.com/sites/default/files/foto_interna/2018/09/17/web_whatsapp_ima_wide_c_5.jpg"
-                    alt="imagen de la entrada de nuestro centro comercial"
-                    class="h-full w-full rounded-2xl object-cover object-top animation-slide-right opacity-0 shadow drop-shadow-xl drop-shadow-black/20"
-                />
-            </div>
-        </article>
-
-        <div class="pb-20 mt-16 w-full">
-            <h4 class="text-3xl text-center mb-12 font-semibold text-zinc-50">
-                Contamos con servicios
-            </h4>
-
-            <div class="flex justify-evenly flex-wrap gap-4">
-                {
-                    Array(3)
-                        .fill({
-                            title: "Bancarios",
-                            icon: <CreditCard />,
-                            desc: "No tengo mucho texto por ahora",
-                            ubi: "Local #etc",
-                        })
-                        .map(({ title, icon, desc, ubi }: ServiceOffer) => (
-                            <article class="flex flex-col bg-white rounded-3xl shadow">
-                                <header class="px-6 py-8 sm:p-10 sm:pb-6">
-                                    <div class="grid items-center justify-center w-full grid-cols-1 text-left">
-                                        <section>
-                                            <h2 class="text-lg font-medium tracking-tighter text-black lg:text-3xl">
-                                                {title}
-                                            </h2>
-                                            <p class="mt-2 text-sm text-zinc-700">
-                                                {desc}
-                                            </p>
-                                        </section>
-                                        <section class="mt-6">
-                                            <p>
-                                                <span class="text-5xl font-light tracking-tight text-black">
-                                                    {icon}
-                                                </span>
-                                                <span class="text-base font-medium text-black">
-                                                    {ubi}
-                                                </span>
-                                            </p>
-                                        </section>
-                                    </div>
-                                </header>
-                                <footer class="flex px-6 pb-8 sm:px-8">
-                                    <a
-                                        aria-describedby="tier-starter"
-                                        class="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full inline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black"
-                                        href="#"
-                                    >
-                                        Conocer
-                                    </a>
-                                </footer>
-                            </article>
-                        ))
-                }
-            </div>
-        </div>
-        <!-- <article class="flex justify-center gap-8">
-            <div
-                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
-            >
-                <h4>Lorem, ipsum.</h4>
-            </div>
-            <div
-                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
-            >
-                <h4>Lorem, ipsum.</h4>
-            </div>
-            <div
-                class="flex items-center justify-center size-50 rounded-2xl shadow bg-white/80 border border-zinc-500 drop-shadow-xl drop-shadow-zinc-900/20"
-            >
-                <h4>Lorem, ipsum.</h4>
-            </div>
-        </article> -->
-    </section>
-</main>
-
-<!-- IntersectionObserver para activar animaciones cuando los elementos entran al viewport -->
-<script>
-    if (typeof window !== "undefined" && "IntersectionObserver" in window) {
-        const prefersReduce = window.matchMedia(
-            "(prefers-reduced-motion: reduce)",
-        ).matches;
-        const observer = new IntersectionObserver(
-            (entries, obs) => {
-                for (const entry of entries) {
-                    const el = entry.target;
-                    if (!(el instanceof HTMLElement)) continue;
-                    if (entry.isIntersecting) {
-                        // añadir la clase y dejar de observar (disparo único)
-                        el.classList.add("in-view");
-                        obs.unobserve(el);
-                    }
-                }
-            },
-            { threshold: 0.35 },
-        );
-
-        // Observar elementos relevantes
-        document.querySelectorAll(".animation-slide-right").forEach((el) => {
-            if (prefersReduce) el.classList.add("in-view");
-            else observer.observe(el);
-        });
-    } else {
-        // si no hay IntersectionObserver, activamos estados finales
-        document
-            .querySelectorAll(".animation-slide-right")
-            .forEach((el) => el.classList.add("in-view"));
-    }
-</script>
+    </div>
+</section>

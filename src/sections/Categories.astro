@@ -1,0 +1,38 @@
+---
+import { turso } from "@services/turso";
+async function create() {
+    try {
+        let { rows } = await turso.execute({
+            sql: `INSERT INTO local (
+    title,
+    local,
+    address,
+    phone_home,
+    phone,
+    social_media,
+    email
+) VALUES (
+    'Centro Comercial Bucaramanga',
+    101,
+    'Cra 33 #45-67, Bucaramanga',
+    '607-6345678',
+    '3024519965',
+    '@ccbucaramanga',
+    'contacto@ccbucaramanga.com'
+);
+`,
+        });
+        return rows;
+    } catch (e) {
+        console.error(e);
+    }
+}
+// create();
+const { rows } = await turso.execute({
+    sql: "select * from local",
+});
+---
+
+<ul>
+    {rows.map((post) => <li>{post.title}</li>)}
+</ul>

@@ -8,24 +8,28 @@ export default function Carousel({
   autoSlideInterval = 5000,
   type,
   visibleSlides,
-  style
+  style,
+  visiblePoints,
+  chevronClass,
+  buttonClass,
+  children
 }: UseCarousel) {
 
   const { handleNextClick, handlePrevClick, moveToSlide, visibleSlidesMacro, translatePx, position, trackRef, maxPosition } = useCarousel({ autoSlide, autoSlideInterval, slides, visibleSlides })
 
   const TYPES_SLIDES = {
     img: (slides && slides.map(({ url: slide, alt }, i) => (
-      <img key={i} alt={alt} className="h-[83svh] object-cover" style={{ minWidth: `${100 / visibleSlidesMacro}%` }} src={slide} />
+      <img key={i} alt={alt} className=" object-[100%] sm:object-cover  h-full" style={{ minWidth: `${100 / visibleSlidesMacro}%` }} src={slide} />
     ))),
     mp4: slides && slides.map(({ url, alt }, i) => (
-      <video key={i} src={url} title={alt} className="rounded-2xl" autoPlay loop muted style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></video>)
+      <video key={i} src={url} title={alt} className="object-cover rounded-2xl aspect-video min-h-44" autoPlay loop muted style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></video>)
     )
   }
 
   return (
     <div
-      className={`overflow-hidden z-10 relative flex-1 no-rounded-transition ${style}`}>
-      <div ref={trackRef} className="flex transition-transform duration-700 ease-in-out gap-6"
+      className={`overflow-hidden z-10 relative flex-1 h-full no-rounded-transition ${style ?? ""}`}>
+      <div ref={trackRef} className="flex transition-transform duration-700 ease-in-out gap-6 h-full"
         style={{
           transform: `translateX(calc(-${translatePx}px))`
         }}
@@ -35,9 +39,9 @@ export default function Carousel({
         }
       </div>
 
-      <ChevronsCarousel handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
+      {children ? children : <ChevronsCarousel buttonClass={buttonClass} chevronClass={chevronClass} handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />}
 
-      <PointsSlides maxPosition={maxPosition} moveToSlide={moveToSlide} position={position} />
+      {visiblePoints && <PointsSlides maxPosition={maxPosition} moveToSlide={moveToSlide} position={position} />}
     </div>
   )
 }
