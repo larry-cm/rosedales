@@ -7,38 +7,32 @@ import type { Row } from "@libsql/client/sqlite3";
 let Locals: Row[] = [];
 let Cate: Row[] = [];
 let SubCate: Row[] = [];
-await Promise.all([
-    (async () => {
-        try {
-            const { rows } = await turso.execute({
-                sql: "select name as nameCategory from category;",
-            });
-            Cate = rows;
-        } catch (error) {
-            console.error(error);
-        }
-    })(),
-    (async () => {
-        try {
-            const { rows } = await turso.execute({
-                sql: "select s.name as subCategory from subcategory s join category c on s.category_id = c.id order by s.name ASC;",
-            });
-            SubCate = rows;
-        } catch (e) {
-            console.error(e);
-        }
-    })(),
-    (async () => {
-        try {
-            const { rows } = await turso.execute({
-                sql: "select * from local",
-            });
-            Locals = rows;
-        } catch (e) {
-            console.error(e);
-        }
-    })(),
-]);
+try {
+    const { rows: categoryRows } = await turso.execute({
+        sql: "select name as nameCategory from category;",
+    });
+    Cate = categoryRows;
+} catch (error) {
+    console.error(error);
+}
+
+try {
+    const { rows: subcategoryRows } = await turso.execute({
+        sql: "select s.name as subCategory from subcategory s join category c on s.category_id = c.id order by s.name ASC;",
+    });
+    SubCate = subcategoryRows;
+} catch (error) {
+    console.error(error);
+}
+
+try {
+    const { rows: localRows } = await turso.execute({
+        sql: "select * from local",
+    });
+    Locals = localRows;
+} catch (error) {
+    console.error(error);
+}
 ---
 
 <h4 class="text-4xl text-center mt-12">
