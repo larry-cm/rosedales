@@ -45,7 +45,11 @@ await Promise.all([
 
 <div class="p-8 m-8 rounded-2xl text-xl bg-green-500">
     <!-- <FondoBg position="right-3 top-3" /> -->
-    <form class="flex flex-col md:flex-row justify-between gap-6">
+    <form
+        action="api/locales.json"
+        method="POST"
+        class="flex flex-col md:flex-row justify-between gap-6"
+    >
         <div class="w-full md:w-4/5 l flex flex-col md:flex-row gap-6">
             <SelectReact
                 name="cate"
