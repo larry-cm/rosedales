@@ -27,6 +27,9 @@
       "@styles/*": [
         "src/styles/*"
       ],
+      "@type/*": [
+        "src/type/*"
+      ],
     }
   }
 }

@@ -1,5 +1,5 @@
+import type { Row } from "@libsql/client";
 import type { JSX } from "astro/jsx-runtime";
-import type React from "react";
 
 export interface ServiceOffer {
     title: string;
@@ -33,4 +33,10 @@ export interface UseCarousel {
 export interface SocialMedia {
     insta: string;
     facebook: string;
+}
+
+export interface TypeCategories {
+    Locals: Row[];
+    Cate: Row[];
+    SubCate: Row[]
 }
