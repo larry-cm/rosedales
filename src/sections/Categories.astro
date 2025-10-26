@@ -1,38 +1,99 @@
 ---
 import { turso } from "@services/turso";
-async function create() {
-    try {
-        let { rows } = await turso.execute({
-            sql: `INSERT INTO local (
-    title,
-    local,
-    address,
-    phone_home,
-    phone,
-    social_media,
-    email
-) VALUES (
-    'Centro Comercial Bucaramanga',
-    101,
-    'Cra 33 #45-67, Bucaramanga',
-    '607-6345678',
-    '3024519965',
-    '@ccbucaramanga',
-    'contacto@ccbucaramanga.com'
-);
-`,
-        });
-        return rows;
-    } catch (e) {
-        console.error(e);
-    }
-}
-// create();
-const { rows } = await turso.execute({
-    sql: "select * from local",
-});
+import { CldImage } from "astro-cloudinary";
+import SelectReact from "@components/SelectReact";
+
+import type { Row } from "@libsql/client/sqlite3";
+let Locals: Row[] = [];
+let Cate: Row[] = [];
+let SubCate: Row[] = [];
+await Promise.all([
+    (async () => {
+        try {
+            const { rows } = await turso.execute({
+                sql: "select name as nameCategory from category;",
+            });
+            Cate = rows;
+        } catch (error) {
+            console.error(error);
+        }
+    })(),
+    (async () => {
+        try {
+            const { rows } = await turso.execute({
+                sql: "select s.name as subCategory from subcategory s join category c on s.category_id = c.id order by s.name ASC;",
+            });
+            SubCate = rows;
+        } catch (e) {
+            console.error(e);
+        }
+    })(),
+    (async () => {
+        try {
+            const { rows } = await turso.execute({
+                sql: "select * from local",
+            });
+            Locals = rows;
+        } catch (e) {
+            console.error(e);
+        }
+    })(),
+]);
 ---
 
-<ul>
-    {rows.map((post) => <li>{post.title}</li>)}
-</ul>
+<h4 class="text-4xl text-center mt-14">Selecciona por <b>categorías</b></h4>
+
+<div class="p-8 m-8 rounded-2xl text-xl bg-green-500">
+    <!-- <FondoBg position="right-3 top-3" /> -->
+    <form class="flex flex-col md:flex-row justify-between gap-6">
+        <div class="w-full md:w-4/5 l flex flex-col md:flex-row gap-6">
+            <SelectReact
+                name="cate"
+                options={Cate.map(({ nameCategory }) => ({
+                    value: nameCategory as string,
+                    label: nameCategory as string,
+                }))}
+                placeholder="Categorías"
+                client:visible
+            />
+            <SelectReact
+                name="sub-cate"
+                options={SubCate.map(({ subCategory }) => ({
+                    value: subCategory as string,
+                    label: subCategory as string,
+                }))}
+                placeholder="Sub Categorías"
+                client:visible
+            />
+        </div>
+        <button
+            class="px-4 py-2 cursor-pointer bg-white/90 rounded-lg shadow ring ring-green-700"
+            type="submit">Buscar</button
+        >
+    </form>
+</div>
+<section
+    class="m-8 grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] bg-zinc-200/90 p-8 rounded-2xl shadow gap-6"
+>
+    {
+        Locals?.map(({ title, local, logo }) => (
+            <a
+                href={`${title?.toLocaleString().toLowerCase().trim().replaceAll(" ", "-")}-${local}`}
+                class="bg-white rounded-xl w-full shadow-lg  px-8 py-4"
+            >
+                <div class="overflow-hidden">
+                    <CldImage
+                        src={logo as string}
+                        alt={title as string}
+                        objectFit="contain"
+                        class="rounded-xl scale-105 aspect-square bg-white"
+                    />
+                </div>
+                <hr />
+                <p class="text-2xl text-center text-zinc-700 py-2">
+                    Local <b>{local}</b>
+                </p>
+            </a>
+        ))
+    }
+</section>
