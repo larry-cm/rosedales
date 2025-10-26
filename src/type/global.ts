@@ -29,3 +29,8 @@ export interface UseCarousel {
     chevronClass?: string;
     children?: Element | JSX.Element
 }
+
+export interface SocialMedia {
+    insta: string;
+    facebook: string;
+}
