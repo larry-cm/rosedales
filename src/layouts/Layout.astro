@@ -4,12 +4,14 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 // SITE_URL should be set in your environment for build (e.g. import.meta.env.SITE_URL)
-const SITE_URL = (import.meta.env && import.meta.env.SITE_URL) || '{SITE_URL}';
-const title = 'Centro Comercial Rosedal. | Bucaramanga';
-const description = 'Centro Comercial Rosedal en Bucaramanga — encuentra eventos, promociones y locales. Visítanos y descubre ofertas y novedades.';
-const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, locales, tiendas';
-
+const SITE_URL = (import.meta.env && import.meta.env.SITE_URL) || "{SITE_URL}";
+const title = "Centro Comercial Rosedal. | Bucaramanga";
+const description =
+	"Centro Comercial Rosedal en Bucaramanga — encuentra eventos, promociones y locales. Visítanos y descubre ofertas y novedades.";
+const keywords =
+	"centro comercial, rosedal, Bucaramanga, promociones, eventos, locales, tiendas";
 ---
+
 <!doctype html>
 <html lang="es">
 	<head>
@@ -40,7 +42,12 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 		<meta name="twitter:image" content={URL_LOGO} />
 
 		<!-- Link to sitemap -->
-		<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+		<link
+			rel="sitemap"
+			type="application/xml"
+			title="Sitemap"
+			href="/sitemap.xml"
+		/>
 
 		<!-- JSON-LD Organization -->
 		<script type="application/ld+json">
@@ -60,13 +67,12 @@ const keywords = 'centro comercial, rosedal, Bucaramanga, promociones, eventos, 
 			}
 		</script>
 	</head>
-	<body class="relative">
- 		<Header  />
-		 <main>
+	<body class="relative overflow-hidden">
+		<Header />
+		<main>
 			<slot />
 		</main>
-  <Footer />
-
+		<Footer />
 	</body>
 </html>
 
