@@ -187,7 +187,7 @@ export default function Categories() {
             <section
                 className="m-8 rounded-2xl shadow overflow-hidden"
             >
-                <div className="bg-zinc-200/90 min-h-fit h-[50vh] p-8">
+                <div className="bg-zinc-200/90 rounded-2xl min-h-fit h-[50vh] p-8">
                     {
                         loadingUpdate ? (
                             <LoadingSpinner className="min-w-screen" />
@@ -219,7 +219,7 @@ export default function Categories() {
 
                 {/* Paginación */}
                 {totalItems > 0 && (
-                    <div className="bg-white">
+                    <div className="bg-zinc-200/90 shadow rounded-2xl">
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}

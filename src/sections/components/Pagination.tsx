@@ -28,7 +28,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const PAGINATION_BUTTON_SIZE = "px-3 py-2";
     const CONTROL_BUTTON_SIZE = "p-2";
     const CONTAINER_PADDING = "px-6 py-4";
-    const MARGIN_TOP = "mt-8";
+    const MARGIN_TOP = "mt-6";
 
     const ITEMS_PER_PAGE_OPTIONS = {
         SMALL: 3,
@@ -76,7 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
     return (
-        <div className={`flex flex-col lg:flex-row items-center justify-between ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING} bg-white rounded-lg shadow-lg`}>
+        <div className={`flex flex-col lg:flex-row items-center justify-between ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING}  `}>
             {/* Información de elementos */}
             <div className="text-sm text-gray-700 sm:min-w-40">
                 <span className="font-medium">{startItem}-{endItem}</span> de{' '}
