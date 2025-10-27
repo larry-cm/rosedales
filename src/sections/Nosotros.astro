@@ -1,8 +1,12 @@
 ---
 import Carousel from "../components/Carousel";
-import { IMAGES } from "../services/constantes.js";
 import LogoRosedal from "../assets/LogoRosedal.astro";
 import FondoBg from "../components/FondoBg.astro";
+import type { objetosSlides } from "@type/global";
+interface Props {
+    images: objetosSlides;
+}
+const { images } = Astro.props;
 ---
 
 <section class="p-8 overflow-x-hidden">
@@ -54,10 +58,10 @@ import FondoBg from "../components/FondoBg.astro";
         <div class="order-2 md:order-1 animation-slide-left select-none">
             <Carousel
                 autoSlide
-                slides={IMAGES}
+                slides={images}
                 type="img"
                 visibleSlides={1}
-                style="size-full md:w-[450px] rounded-2xl aspect-video h-auto"
+                style="size-full md:w-[450px] rounded-xl aspect-video h-auto"
                 chevronClass="size-6"
                 buttonClass="p-1 bg-green-500 rounded-xl text-white cursor-pointer active:scale-95"
                 client:visible
@@ -87,10 +91,10 @@ import FondoBg from "../components/FondoBg.astro";
     </article>
     <!-- formulario de contáctenos -->
     <article
-        class="bg-green-500 z-10 overflow-hidden relative rounded-tl-[130px_130px] rounded-br-[130px_130px] rounded p-8 py-18"
+        class="bg-green-500 z-10 overflow-hidden relative rounded-4xl p-8 py-18"
     >
-        <FondoBg position="bottom-3 right-3" />
-        <FondoBg />
+        <FondoBg position="-bottom-16 right-3" />
+        <FondoBg position="-right-20 -top-15 sm:right-4 sm:-top-20" />
         <form class="max-w-xl mx-auto">
             <i
                 class="mb-8 block w-fit mx-auto md:ms-0 md:*:w-40 *:w-42 md:scale-100 scale-125"
@@ -109,7 +113,7 @@ import FondoBg from "../components/FondoBg.astro";
                         type="text"
                         name="nombre"
                         placeholder="Nombre"
-                        class="rounded-2xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <label>
@@ -118,7 +122,7 @@ import FondoBg from "../components/FondoBg.astro";
                         type="text"
                         name="correo"
                         placeholder="Correo Electrónico"
-                        class="rounded-2xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <label>
@@ -127,33 +131,35 @@ import FondoBg from "../components/FondoBg.astro";
                         type="text"
                         name="asunto"
                         placeholder="Asunto o recomendación"
-                        class="rounded-2xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <textarea
                     name="mensaje"
                     rows="3"
-                    class="rounded-2xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                    class="field rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     placeholder="Mensaje referente al asunto o recomendación"
                 ></textarea>
                 <div class="mt-4 space-y-2">
-                    <div class="flex gap-2 select-text">
+                    <div
+                        class="flex gap-2 select-text bg-zinc-100 shadow p-4 rounded-xl"
+                    >
                         <input
                             id="privacidad-check"
                             type="checkbox"
                             name="privacidad-check"
-                            class="rounded-full block size-4 p-2 ring ring-green-500 select-none"
+                            class="block size-4 p-2 select-none"
                         />
                         <label
                             for="privacidad-check"
-                            class="text-xs block text-pretty flex-1 text-zinc-100"
+                            class="text-xs font-semibold block text-pretty flex-1 text-zinc-600"
                         >
                             Acepto política de tratamiento de datos personales.
                         </label>
                     </div>
                     <button
                         type="submit"
-                        class="items-center justify-center w-full px-6 py-2.5 text-center text-black font-semibold duration-200 bg-white border-2 border-white rounded-full inline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm focus-visible:ring-white cursor-pointer"
+                        class="items-center justify-center w-full px-6 py-2.5 text-center text-black font-semibold duration-200 bg-white border-2 border-white rounded-xl inline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm focus-visible:ring-white cursor-pointer"
                         >Enviar</button
                     >
                 </div>
@@ -161,6 +167,12 @@ import FondoBg from "../components/FondoBg.astro";
         </form>
     </article>
 </section>
+<style>
+    .field {
+        field-sizing: content;
+        min-height: 4lh;
+    }
+</style>
 <!-- No se inicia la animación automáticamente: se activa al entrar en viewport -->
 <style>
     .animation-slide-right {

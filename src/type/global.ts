@@ -15,7 +15,7 @@ export interface TypeChevronsCarousel {
     buttonClass?: string;
     chevronClass?: string;
 }
-type objetosSlides = Array<{ url: string, alt: string }>
+export type objetosSlides = Array<{ url: string, alt: string, local?: number }>
 
 export interface UseCarousel {
     autoSlide?: boolean;
@@ -27,6 +27,7 @@ export interface UseCarousel {
     style?: string;
     buttonClass?: string;
     chevronClass?: string;
+    classImg?: string;
     children?: Element | JSX.Element
 }
 

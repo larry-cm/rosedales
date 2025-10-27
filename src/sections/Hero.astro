@@ -1,13 +1,17 @@
 ---
-import { IMAGES } from "../services/constantes.js";
-
 import { Gift } from "react-feather";
 import Carousel from "../components/Carousel";
 
-import Image from "astro/components/Image.astro";
-import { vi } from "../services/constantes.js";
 import LogoRosedal from "../assets/LogoRosedal.astro";
 import FondoBg from "../components/FondoBg.astro";
+import { AdvancedImage } from "@cloudinary/react";
+import { cld } from "../services/constantes.js";
+import type { objetosSlides } from "@type/global";
+
+interface Props {
+    images: objetosSlides;
+}
+const { images } = Astro.props;
 ---
 
 <!-- animación para el texto que aparece hacia abajo -->
@@ -30,11 +34,12 @@ import FondoBg from "../components/FondoBg.astro";
 <!-- primer carousel -->
 <section class="relative">
     <div class="bg-green-500">
-        <div class="h-45 md:h-[85dvh]">
+        <div class="h-45 md:h-[85dvh] bg-white">
             <Carousel
                 type="img"
-                slides={IMAGES}
+                slides={images}
                 visibleSlides={1}
+                classImg="size-full object-contain"
                 autoSlide
                 visiblePoints
                 client:visible
@@ -74,29 +79,38 @@ import FondoBg from "../components/FondoBg.astro";
     >
         <!-- cards de locales principales -->
         {
-            IMAGES.concat(IMAGES)
+            images
+                .concat(images)
                 .slice(0, 3)
-                .map(({ slug, url, alt }) => (
+                .map(({ url, alt, local }) => (
                     <article>
                         <a
-                            href={slug}
-                            class=" group/link shadow overflow-hidden flex rounded-2xl drop-shadow-xl sm:drop-shadow-none md:drop-shadow-xl drop-shadow-zinc-900/30 w-fit mx-auto"
+                            href={
+                                alt.toLowerCase().trim().replaceAll(" ", "-") +
+                                `-${local}`
+                            }
+                            class=" group/link hover:scale-115 transition duration-300 overflow-hidden flex rounded-2xl select-none w-fit mx-auto"
                         >
-                            <Image
+                            <AdvancedImage
                                 width={200}
                                 height={200}
                                 loading="lazy"
-                                src={url}
+                                cldImg={cld.image(url)}
                                 alt={alt}
                                 class="h-44 w-auto aspect-video  md:w-full object-cover"
                             />
                         </a>
                         <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
                             <h3 class="text-2xl font-semibold tracking-wide">
-                                Lorem ipsum dolor sit
+                                {alt}
                             </h3>
                             <a
-                                href={slug}
+                                href={
+                                    alt
+                                        .toLowerCase()
+                                        .trim()
+                                        .replaceAll(" ", "-") + `-${local}`
+                                }
                                 class="underline text-lg text-zinc-700 hover:text-green-500  transition duration-200"
                             >
                                 Ir a conocer mas.
@@ -108,29 +122,29 @@ import FondoBg from "../components/FondoBg.astro";
     </section>
 </section>
 <!-- algunos locales -->
-<section
-    class="m-8 rounded-tl-[130px_130px] z-10 rounded bg-green-500 rounded-br-[130px_130px] p-8 md:p-16 space-y-12 overflow-hidden relative"
->
-    <FondoBg />
+<section class="m-8 rounded-4xl z-10 bg-green-500 p-8 overflow-hidden relative">
+    <FondoBg position="-bottom-16 left-3 " />
     <h3
-        class="sm:block text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-6 px-0 hidden"
+        class="text-3xl sm:text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-8 px-0 mb-10"
     >
-        Manejamos <strong class="font-semibold">gran variedad</strong> en productos
+        Manejamos <strong class="font-semibold">gran variedad</strong> de productos
     </h3>
 
-    <div class="flex items-center flex-col lg:flex-row gap-6 py-6 sm:pb-0">
+    <div class="flex items-center flex-col lg:flex-row gap-6 sm:pb-0">
         <Carousel
-            type="mp4"
-            style="rounded-2xl order-2 sm:order-1 "
-            slides={vi}
+            type="img"
+            style="rounded-2xl order-2 sm:order-1 w-full"
+            chevronClass="size-6 md:size-8 block btn-effect hover:stroke-zinc-300 backdrop-blur-md bg-green-500 text-white rounded-xl hover:stroke-green-500 transition duration-300"
+            classImg="bg-white object-contain aspect-square rounded-2xl p-4"
+            slides={images.slice(3)}
             autoSlide
             visiblePoints
             client:visible
         />
         <article
-            class="mx-auto order-1 sm:order-2 select-none md:ms-auto bg-white p-2 rounded-full grid place-content-center size-36 md:my-auto"
+            class="mx-auto hidden order-1 sm:order-2 select-none md:ms-auto bg-white p-2 rounded-full lg:grid place-content-center aspect-square md:my-auto"
         >
-            <LogoRosedal fill="black" size={120} />
+            <LogoRosedal fill="black" />
         </article>
     </div>
     <p class="sr-only" id="locales"></p>

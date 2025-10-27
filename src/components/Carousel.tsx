@@ -2,6 +2,8 @@ import useCarousel from "../hooks/useCarousel";
 import PointsSlides from "./PointsSlides";
 import { type UseCarousel } from "../type/global";
 import { ChevronsCarousel } from "./ChevronsCarousel";
+import { AdvancedImage } from '@cloudinary/react';
+import { cld } from "@services/constantes";
 export default function Carousel({
   slides,
   autoSlide = false,
@@ -12,6 +14,7 @@ export default function Carousel({
   visiblePoints,
   chevronClass,
   buttonClass,
+  classImg,
   children
 }: UseCarousel) {
 
@@ -19,17 +22,21 @@ export default function Carousel({
 
   const TYPES_SLIDES = {
     img: (slides && slides.map(({ url: slide, alt }, i) => (
-      <img key={i} alt={alt} className=" object-[100%] sm:object-cover  h-full" style={{ minWidth: `${100 / visibleSlidesMacro}%` }} src={slide} />
+      <AdvancedImage
+        key={i}
+        className={classImg}
+        style={{ minWidth: `calc(${100 / visibleSlidesMacro}% - ${visibleSlidesMacro === 3 ? "16px" : "0px"})` }}
+        cldImg={cld.image(slide)} />
     ))),
     mp4: slides && slides.map(({ url, alt }, i) => (
-      <video key={i} src={url} title={alt} className="object-cover rounded-2xl aspect-video min-h-44" autoPlay loop muted style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></video>)
+      <AdvancedImage key={i} cldImg={cld.video(url)} title={alt} className="object-cover rounded-2xl aspect-video min-h-44" autoPlay loop muted controls style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></AdvancedImage>)
     )
   }
 
   return (
     <div
-      className={`overflow-hidden z-10 relative flex-1 h-full no-rounded-transition ${style ?? ""}`}>
-      <div ref={trackRef} className="flex transition-transform duration-700 ease-in-out gap-6 h-full"
+      className={`overflow-hidden z-10 relative h-full no-rounded-transition bg-transparent ${style ?? ""}`}>
+      <div ref={trackRef} className="flex w-full items-center transition-transform duration-700 ease-in-out gap-6 h-full"
         style={{
           transform: `translateX(calc(-${translatePx}px))`
         }}

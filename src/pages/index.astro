@@ -3,11 +3,30 @@ import "@styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "@sections/Hero.astro";
 import Nosotros from "@sections/Nosotros.astro";
-import Categories from "@sections/Categories.astro";
+import Categories from "@sections/Categories";
+// petición para las imágenes
+
+import { type objetosSlides } from "@type/global";
+import { turso } from "@services/turso";
+let IMAGES: objetosSlides = [{ url: "", alt: "" }];
+try {
+  const { rows } = await turso.execute({
+    sql: "select logo,title,local from local where logo is not null;",
+  });
+  IMAGES = rows.map(({ logo: url, title: alt, local }) => ({
+    url: url?.toString() ?? "",
+    alt: alt?.toString() ?? "",
+    local: parseInt(local?.toString() ?? ""),
+  }));
+} catch (error) {
+  throw new Error(
+    "Error al intentar capturar las imágenes del primer carousel" + error,
+  );
+}
 ---
 
 <Layout>
-  <Hero />
-  <Categories />
-  <Nosotros />
+  <Hero images={IMAGES} />
+  <Categories client:idle />
+  <Nosotros images={IMAGES} />
 </Layout>

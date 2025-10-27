@@ -12,8 +12,7 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
         const { rows } = await turso.execute({
             sql: `
 SELECT
-  l.title AS title,
-  l.local AS local
+  *
 FROM
   local l
   JOIN local_category lc ON l.id = lc.local_id
@@ -28,7 +27,7 @@ ORDER BY
         return new Response(
             JSON.stringify({
                 path: new URL(request.url).pathname,
-                message: rows,
+                data: rows,
             }),
         );
     }

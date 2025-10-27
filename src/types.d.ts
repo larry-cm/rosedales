@@ -9,3 +9,11 @@ interface ImportMetaEnv {
     SITE_URL?: string;
 }
 interface ImportMeta { readonly env: ImportMetaEnv }
+declare namespace NodeJS {
+    interface ProcessEnv {
+        TURSO_AUTH_TOKEN: string;
+        TURSO_DATABASE_URL: string;
+        PUBLIC_CLOUDINARY_CLOUD_NAME: string;
+        SITE_URL?: string;
+    }
+}

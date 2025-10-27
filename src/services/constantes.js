@@ -1,5 +1,5 @@
 import videoMp4 from "../assets/videos/videosCarousel.mp4";
-
+import { Cloudinary } from "@cloudinary/url-gen";
 // constantes del header
 export const LINK_PAGE = ["Promociones", "Locales", "Contáctenos"]
 export const SOCIAL_MEDIA = ["Facebook", "Instagram", "LinkedIn"]
@@ -31,3 +31,10 @@ export const SERVICIOS = (icon) => Array(3).fill({
     ubi: 'cra19 # 39-25',
     url: 'no tengo'
 })
+
+// cloudinary 
+export const cld = new Cloudinary({
+    cloud: {
+        cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PUBLIC_CLOUDINARY_CLOUD_NAME
+    }
+});

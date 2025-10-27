@@ -7,11 +7,12 @@ interface Option {
 
 interface SelectReactProps {
     name: string;
-    options: Option[];
+    options: Option[] | [];
     placeholder?: string;
     className?: string;
     value?: string;
     onChange?: (value: string) => void;
+    setVal: (val: string) => void | undefined;
 }
 
 export const SelectReact: React.FC<SelectReactProps> = ({
@@ -20,6 +21,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
     placeholder = 'Selecciona una opción',
     className = '',
     value = '',
+    setVal,
     onChange
 }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -84,6 +86,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
         };
     }, []);
 
+    useEffect(() => { setVal(selectedValue) }, [selectedValue])
     const selectedOption = options.find(option => option.value === selectedValue);
     const displayText = selectedOption ? selectedOption.label : placeholder;
 
@@ -92,7 +95,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
             <button
                 ref={buttonRef}
                 type="button"
-                className="bg-zinc-100 outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 sm:min-w-xs "
+                className="bg-zinc-100 outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 min-w-fit text-start lg:min-w-xs "
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={displayText}
