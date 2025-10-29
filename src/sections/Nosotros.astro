@@ -57,12 +57,14 @@ const { images } = Astro.props;
     </article>
     <article class="flex items-center flex-col lg:flex-row gap-6 mb-14">
         <div class="order-2 md:order-1 animation-slide-left select-none">
+            s
             <Carousel
                 autoSlide
                 slides={images}
                 type="img"
                 visibleSlides={1}
-                style="size-full md:w-[450px] rounded-xl aspect-video h-auto"
+                classImg="object-contain aspect-video"
+                style="size-full md:w-[450px] rounded-xl  h-auto"
                 chevronClass="size-6"
                 buttonClass="p-1 bg-green-500 rounded-xl text-white cursor-pointer active:scale-95"
                 client:visible
