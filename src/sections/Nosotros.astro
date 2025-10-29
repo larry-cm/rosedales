@@ -57,7 +57,6 @@ const { images } = Astro.props;
     </article>
     <article class="flex items-center flex-col lg:flex-row gap-6 mb-14">
         <div class="order-2 md:order-1 animation-slide-left select-none">
-            s
             <Carousel
                 autoSlide
                 slides={images}
@@ -116,7 +115,7 @@ const { images } = Astro.props;
                         type="text"
                         name="nombre"
                         placeholder="Nombre"
-                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <label>
@@ -125,7 +124,7 @@ const { images } = Astro.props;
                         type="text"
                         name="correo"
                         placeholder="Correo Electrónico"
-                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <label>
@@ -134,13 +133,13 @@ const { images } = Astro.props;
                         type="text"
                         name="asunto"
                         placeholder="Asunto o recomendación"
-                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                        class="rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     />
                 </label>
                 <textarea
                     name="mensaje"
                     rows="3"
-                    class="field rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 appearance-none placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
+                    class="field rounded-xl text-xs w-full placeholder:font-semibold bg-white ring ring-green-500 placeholder:text-xs sm:placeholder:text-lg px-6 py-2.5 sm:text-lg"
                     placeholder="Mensaje referente al asunto o recomendación"
                 ></textarea>
                 <div class="mt-6 space-y-3">

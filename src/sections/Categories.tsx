@@ -48,7 +48,7 @@ export default function Categories() {
 
     async function handleSubmit() {
         let formData = new FormData()
-        if (cateVal || subCateVal) {
+        if (!cateVal || !subCateVal) {
             formData.append('cate', cateVal as string)
             formData.append('sub-cate', subCateVal as string)
         }

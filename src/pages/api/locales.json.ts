@@ -35,17 +35,19 @@ ORDER BY
         return new Response(
             JSON.stringify({
                 path: new URL(request.url).pathname,
-                message: subCate,
+                data: [],
             }),
         );
     }
     if (!cate || !subCate) {
+         const { rows } = await turso.execute({
+            sql: "select logo,title,local from local where logo is not null;",
+        });
         return new Response(
             JSON.stringify({
                 path: new URL(request.url).pathname,
-                message: "Error",
+                 data:rows,
             }),
-            { status: 400 },
         );
     }
     return new Response(
