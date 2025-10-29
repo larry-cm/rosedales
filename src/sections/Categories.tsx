@@ -1,15 +1,13 @@
-// import { Cloudinary } from "@cloudinary/url-gen";
-// import { AdvancedImage } from '@cloudinary/react';
-import SelectReact from "@components/SelectReact";
-import { useEffect, useState } from "react";
-import type { TypeCategories } from "@type/global";
-import type { Row } from "@libsql/client";
+import { cld } from "@services/cloudinary"
 import { RefreshCcw } from "react-feather";
+import { useEffect, useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
-import NoResults from "./components/NoResults";
 import LocalCard from "./components/LocalCard";
+import NoResults from "./components/NoResults";
 import Pagination from "./components/Pagination";
-import { cld } from "@services/constantes"
+import SelectReact from "@components/SelectReact";
+import type { Row } from "@libsql/client";
+import type { TypeCategories } from "@type/global";
 
 export default function Categories() {
     const [cateVal, setCateVal] = useState<string | null>(null)
@@ -139,7 +137,7 @@ export default function Categories() {
                 Selecciona por <b>categorías</b>
             </h4>
 
-            <div className="p-8 m-8 rounded-2xl text-xl bg-green-500">
+            <div className="p-8 m-8 mt-10 rounded-2xl shadow text-xl bg-green-500">
                 <form
                     onSubmit={(e) => { e.preventDefault() }}
                     action="api/locales.json"
@@ -165,16 +163,16 @@ export default function Categories() {
                             })) || []}
                             placeholder="Sub Categorías"
                         />
-                        <button onClick={resetFilters} type="button" className=" hidden md:block lg:hidden px-4 py-2 cursor-pointer bg-white/90 rounded-lg shadow ring ring-green-700">
+                        <button onClick={resetFilters} type="button" className=" hidden md:block lg:hidden px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700">
                             <RefreshCcw className="size-6" />
                         </button>
                     </div>
                     <div className="flex gap-6">
-                        <button onClick={resetFilters} type="button" className="block md:hidden lg:block px-4 py-2 cursor-pointer bg-white/90 rounded-lg shadow ring ring-green-700">
+                        <button onClick={resetFilters} type="button" className="block md:hidden lg:block px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700">
                             <RefreshCcw className="size-6" />
                         </button>
                         <button
-                            className="px-4 flex-1 py-2 font-semibold cursor-pointer bg-white/90 rounded-lg shadow ring ring-green-700"
+                            className="px-4 flex-1 py-2 font-semibold cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700"
                             type="submit"
                             onClick={handleSubmit}
                         >
@@ -187,7 +185,7 @@ export default function Categories() {
             <section
                 className="m-8 rounded-2xl shadow overflow-hidden"
             >
-                <div className="bg-zinc-200/90 rounded-2xl min-h-fit h-[50vh] p-8">
+                <div className="rounded-2xl min-h-fit h-[50vh] p-8">
                     {
                         loadingUpdate ? (
                             <LoadingSpinner className="min-w-screen" />
@@ -219,7 +217,7 @@ export default function Categories() {
 
                 {/* Paginación */}
                 {totalItems > 0 && (
-                    <div className="bg-zinc-200/90 shadow rounded-2xl">
+                    <div className="">
                         <Pagination
                             currentPage={currentPage}
                             totalPages={totalPages}

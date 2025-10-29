@@ -8,6 +8,7 @@ import Categories from "@sections/Categories";
 
 import { type objetosSlides } from "@type/global";
 import { turso } from "@services/turso";
+
 let IMAGES: objetosSlides = [{ url: "", alt: "" }];
 try {
   const { rows } = await turso.execute({

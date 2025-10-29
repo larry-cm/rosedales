@@ -1,11 +1,10 @@
 ---
+import { AdvancedImage } from "@cloudinary/react";
+import { cld } from "@services/cloudinary";
 import { Gift } from "react-feather";
 import Carousel from "../components/Carousel";
-
-import LogoRosedal from "../assets/LogoRosedal.astro";
 import FondoBg from "../components/FondoBg.astro";
-import { AdvancedImage } from "@cloudinary/react";
-import { cld } from "../services/constantes.js";
+import LogoRosedal from "../assets/LogoRosedal.astro";
 import type { objetosSlides } from "@type/global";
 
 interface Props {
@@ -34,7 +33,7 @@ const { images } = Astro.props;
 <!-- primer carousel -->
 <section class="relative">
     <div class="bg-green-500">
-        <div class="h-45 md:h-[85dvh] bg-white">
+        <div class="bg-zinc-100 h-45 md:h-[85dvh]">
             <Carousel
                 type="img"
                 slides={images}
@@ -75,7 +74,7 @@ const { images } = Astro.props;
         </h2>
     </article>
     <section
-        class="p-8 grid w-full mx-auto items-center grid-cols-1 lg:grid-cols-3 gap-4 justify-evenly"
+        class="p-8 grid w-full mx-auto place-content-center grid-cols-1 lg:grid-cols-3 gap-4 justify-center"
     >
         <!-- cards de locales principales -->
         {
@@ -83,13 +82,13 @@ const { images } = Astro.props;
                 .concat(images)
                 .slice(0, 3)
                 .map(({ url, alt, local }) => (
-                    <article>
+                    <article class="group/link border border-zinc-300 shadow rounded-2xl mx-auto min-w-xs px-8 py-4">
                         <a
                             href={
                                 alt.toLowerCase().trim().replaceAll(" ", "-") +
                                 `-${local}`
                             }
-                            class=" group/link hover:scale-115 transition duration-300 overflow-hidden flex rounded-2xl select-none w-fit mx-auto"
+                            class="group-hover/link:scale-105 transition duration-300 overflow-hidden flex rounded-2xl select-none w-fit mx-auto"
                         >
                             <AdvancedImage
                                 width={200}
@@ -125,9 +124,11 @@ const { images } = Astro.props;
 <section class="m-8 rounded-4xl z-10 bg-green-500 p-8 overflow-hidden relative">
     <FondoBg position="-bottom-16 left-3 " />
     <h3
-        class="text-3xl sm:text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-8 px-0 mb-10"
+        class="text-3xl sm:text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-8 px-0 mb-14"
     >
-        Manejamos <strong class="font-semibold">gran variedad</strong> de productos
+        Descubre nuestra <strong class="font-semibold"
+            >extensa colección
+        </strong> de productos
     </h3>
 
     <div class="flex items-center flex-col lg:flex-row gap-6 sm:pb-0">

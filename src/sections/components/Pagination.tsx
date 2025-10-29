@@ -46,7 +46,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const TAILWIND_CLASSES = {
         BUTTON_BORDER: "border border-gray-300",
         BUTTON_DISABLED: "disabled:opacity-50 disabled:cursor-not-allowed",
-        BUTTON_HOVER: "hover:bg-gray-50",
+        BUTTON_HOVER: "hover:bg-gray-50 hover:bg-zinc-200 cursor-pointer ",
         BUTTON_FOCUS: "focus:outline-none focus:ring-2 focus:ring-green-500",
         TRANSITION: `transition-colors duration-${ANIMATION_DURATION_MS}`
     };
@@ -77,31 +77,8 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return (
         <div className={`flex flex-col lg:flex-row items-center justify-between ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING}  `}>
-            {/* Información de elementos */}
-            <div className="text-sm text-gray-700 sm:min-w-40">
-                <span className="font-medium">{startItem}-{endItem}</span> de{' '}
-                <span className="font-medium">{totalItems}</span> elementos
-            </div>
-
-            {/* Controles de elementos por página */}
-            <div className={`flex items-center ${GAP_CLASS}`}>
-                <label className="text-sm text-gray-700">Mostrar:</label>
-                <select
-                    disabled={currentPage === MIN_PAGE}
-                    value={itemsPerPage}
-                    onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
-                    className={`px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500
-                        ${currentPage === MIN_PAGE ? 'cursor-not-allowed' : ''}`}
-                >
-                    {getAvailableOptions().map(option => (
-                        <option key={option} value={option}>{option}</option>
-                    ))}
-                </select>
-                <span className="text-sm text-gray-700">por página</span>
-            </div>
-
             {/* Controles de paginación */}
-            <div className={`flex items-center ${GAP_CLASS}`}>
+            <div className={`flex items-center mx-auto ${GAP_CLASS}`}>
                 {/* Primera página */}
                 <button
                     onClick={(e) => {
@@ -140,8 +117,8 @@ const Pagination: React.FC<PaginationProps> = ({
                             onPageChange(pageNum)
                         }}
                         className={`${PAGINATION_BUTTON_SIZE} rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 ${currentPage === pageNum
-                            ? 'bg-green-500 text-white shadow-lg'
-                            : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+                            ? 'bg-green-500 text-white  font-semibold shadow-lg'
+                            : 'bg-white border border-gray-300 text-gray-700 hover:bg-zinc-200 cursor-pointer transition duration-200'
                             }`}
                     >
                         {pageNum}

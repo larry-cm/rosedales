@@ -5,7 +5,7 @@ interface TypePointsSlides {
 }
 export default function PointsSlides({ maxPosition, moveToSlide, position }: TypePointsSlides) {
     return (
-        <div className=" absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2 h-8 backdrop-blur-md bg-white/70 rounded-full shadow min-w-24 w-fit mx-auto px-4 py-0.5" >
+        <div className=" absolute bottom-4 right-0 left-0 flex items-center justify-center gap-2 h-8 backdrop-blur-md bg-zinc-300 rounded-full shadow min-w-24 w-fit mx-auto px-4 py-0.5" >
             {
                 Array.from({ length: maxPosition + 1 }).map((_, i) => (
                     <i onClick={() => moveToSlide({ position: i })} key={i} className={

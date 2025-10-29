@@ -3,7 +3,7 @@ import PointsSlides from "./PointsSlides";
 import { type UseCarousel } from "../type/global";
 import { ChevronsCarousel } from "./ChevronsCarousel";
 import { AdvancedImage } from '@cloudinary/react';
-import { cld } from "@services/constantes";
+import { cld } from "@services/cloudinary";
 export default function Carousel({
   slides,
   autoSlide = false,
@@ -35,7 +35,7 @@ export default function Carousel({
 
   return (
     <div
-      className={`overflow-hidden z-10 relative h-full no-rounded-transition bg-transparent ${style ?? ""}`}>
+      className={`overflow-hidden z-10 relative h-full no-rounded-transition  ${style ?? ""}`}>
       <div ref={trackRef} className="flex w-full items-center transition-transform duration-700 ease-in-out gap-6 h-full"
         style={{
           transform: `translateX(calc(-${translatePx}px))`
