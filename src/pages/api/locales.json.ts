@@ -5,8 +5,8 @@ export const prerender = false;
 
 export const POST: APIRoute = async ({ request, locals, redirect }) => {
     const data = await request.formData();
-    const cate = data.get("cate");
-    const subCate = data.get("sub-cate");
+    const cate = data.get("cate") as string;
+    const subCate = data.get("sub-cate") as string;
 
     if (cate && !subCate) {
         const { rows } = await turso.execute({
@@ -21,8 +21,8 @@ WHERE
   c.name = ?
 ORDER BY
   l.local ASC;
-`,
-            args: [cate as string]
+            `,
+            args: [cate]
         })
         return new Response(
             JSON.stringify({
@@ -32,6 +32,29 @@ ORDER BY
         );
     }
     if (!cate && subCate) {
+        const { rows } = await turso.execute({
+            sql: `
+SELECT distinct
+  l.*
+FROM
+  local l
+  JOIN local_subcategory lsbc ON l.id = lsbc.local_id
+  JOIN subcategory sb ON lsbc.subcategory_id = sb.id
+WHERE sb.name = ? 
+ORDER BY
+  l.local ASC;
+                `,
+            args: [subCate]
+        })
+
+        return new Response(
+            JSON.stringify({
+                path: new URL(request.url).pathname,
+                data: rows,
+            }),
+        );
+    }
+    if (!cate || !subCate) {
         return new Response(
             JSON.stringify({
                 path: new URL(request.url).pathname,
@@ -39,21 +62,28 @@ ORDER BY
             }),
         );
     }
-    if (!cate || !subCate) {
-         const { rows } = await turso.execute({
-            sql: "select logo,title,local from local where logo is not null;",
-        });
-        return new Response(
-            JSON.stringify({
-                path: new URL(request.url).pathname,
-                 data:rows,
-            }),
-        );
-    }
+
+    const { rows } = await turso.execute({
+        sql: `
+SELECT DISTINCT
+l.*
+FROM
+  local l
+  JOIN local_subcategory lsbc ON l.id = lsbc.local_id
+  JOIN local_category lc on l.id = lc.local_id
+  JOIN subcategory sb ON lsbc.subcategory_id = sb.id
+  JOIN category c ON sb.category_id = c.id
+WHERE c.name = ? AND sb.name = ?
+ORDER BY
+  l.local ASC;
+            `,
+        args: [cate, subCate]
+    })
+
     return new Response(
         JSON.stringify({
             path: new URL(request.url).pathname,
-            message: "hi!",
+            data: rows,
         }),
     );
 };

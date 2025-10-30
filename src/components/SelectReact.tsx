@@ -25,13 +25,13 @@ export const SelectReact: React.FC<SelectReactProps> = ({
     onChange
 }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState(value);
+    // const [selectedValue, setSelectedValue] = useState(value);
     const [focusedIndex, setFocusedIndex] = useState(-1);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const handleSelect = (option: Option) => {
-        setSelectedValue(option.value);
+        setVal(option.value);
         setIsOpen(false);
         if (onChange) {
             onChange(option.value);
@@ -86,8 +86,8 @@ export const SelectReact: React.FC<SelectReactProps> = ({
         };
     }, []);
 
-    useEffect(() => { setVal(selectedValue) }, [selectedValue])
-    const selectedOption = options.find(option => option.value === selectedValue);
+    useEffect(() => { setVal(value) }, [value])
+    const selectedOption = options.find(option => option.value === value);
     const displayText = selectedOption ? selectedOption.label : placeholder;
 
     return (
@@ -102,7 +102,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
                 onClick={() => setIsOpen(!isOpen)}
                 onKeyDown={handleKeyDown}
             >
-                <span className={selectedValue ? 'text-zinc-900' : 'text-zinc-500'}>
+                <span className={value ? 'text-zinc-900' : 'text-zinc-500'}>
                     {displayText}
                 </span>
                 <svg
@@ -125,10 +125,10 @@ export const SelectReact: React.FC<SelectReactProps> = ({
                         <button
                             key={option.value}
                             type="button"
-                            className={`w-full px-4 py-3 text-left flex justify-between items-center   focus:outline-none transition duration-300 ${selectedValue === option.value ? 'bg-green-500  text-white font-semibold' : 'text-zinc-900 hover:scale-102 hover:bg-zinc-200'
+                            className={`w-full px-4 py-3 text-left flex justify-between items-center   focus:outline-none transition duration-300 ${value === option.value ? 'bg-green-500  text-white font-semibold' : 'text-zinc-900 hover:scale-102 hover:bg-zinc-200'
                                 } ${focusedIndex === index ? 'bg-green-100' : ''} snap-center sm:snap-none`}
                             role="option"
-                            aria-selected={selectedValue === option.value}
+                            aria-selected={value === option.value}
                             onClick={() => handleSelect(option)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' || e.key === ' ') {
@@ -137,13 +137,13 @@ export const SelectReact: React.FC<SelectReactProps> = ({
                                 }
                             }}
                         >
-                            {option.label} {selectedValue === option.value && <Check className='size-6' />}
+                            {option.label} {value === option.value && <Check className='size-6' />}
                         </button>
                     ))}
                 </div>
             )}
 
-            <input type="hidden" name={name} value={selectedValue} />
+            <input type="hidden" name={name} value={value} />
         </div>
     );
 };

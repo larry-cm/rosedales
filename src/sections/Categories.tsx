@@ -11,7 +11,7 @@ import type { TypeCategories } from "@type/global";
 
 export default function Categories() {
     const [cateVal, setCateVal] = useState<string | null>(null)
-    const [subCateVal, setSuBCateVal] = useState<string | null>(null)
+    const [subCateVal, setSubCateVal] = useState<string | null>(null)
     const [loadingGlobal, setLoadingGlobal] = useState<boolean>(false)
     const [loadingUpdate, setLoadingUpdate] = useState<boolean>(false)
     const [data, setData] = useState<TypeCategories | null>(null)
@@ -33,7 +33,6 @@ export default function Categories() {
                 throw new Error('Error al hacer la petición: ' + error)
             })
     }
-
     async function getAllDataCategories() {
         setLoadingGlobal(true)
         setData(await getInitial())
@@ -46,40 +45,17 @@ export default function Categories() {
             .catch(e => { throw new Error(e) })
     }, [])
 
-    async function handleSubmit() {
-        let formData = new FormData()
-        if (!cateVal || !subCateVal) {
-            formData.append('cate', cateVal as string)
-            formData.append('sub-cate', subCateVal as string)
-        }
-        try {
-            setLoadingUpdate(true)
-            const res = await fetch("api/locales.json", { method: "POST", body: formData })
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-            const data = await res.json()
-            // Handle the data here
-            setLoadingUpdate(false)
-            const newLocals = data.data as Row[]
-            setData(oldData => oldData ? {
-                ...oldData,
-                Locals: newLocals
-            } : null)
 
-        } catch (error) {
-            throw new Error('Error al hacer la petición: ' + error)
-        } finally {
-            setLoadingGlobal(false)
-        }
-    }
     function listenValCate(val: string) {
         setCateVal(val)
     }
     function listenValSubCate(val: string) {
-        setSuBCateVal(val)
+        setSubCateVal(val)
     }
     function resetFilters() {
+        if (!cateVal && !subCateVal) return
         setCateVal("")
-        setSuBCateVal("")
+        setSubCateVal("")
         setCurrentPage(1) // Resetear a la primera página
         setLoadingUpdate(true)
         getInitial()
@@ -96,12 +72,36 @@ export default function Categories() {
     }
 
     // Funciones de paginación
-    const totalItems = Locals?.length || 0
+    const totalItems = Locals?.length ?? 0
     const totalPages = Math.ceil(totalItems / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
-    const currentItems = Locals?.slice(startIndex, endIndex) || []
+    const currentItems = Locals?.slice(startIndex, endIndex) ?? []
 
+
+    async function handleSubmit() {
+        if (!cateVal && !subCateVal) return
+        let formData = new FormData()
+        formData.append('cate', cateVal ?? "")
+        formData.append('sub-cate', subCateVal ?? "")
+        try {
+            setLoadingUpdate(true)
+            const res = await fetch("api/locales.json", { method: "POST", body: formData })
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+            const data = await res.json()
+            setLoadingUpdate(false)
+            const newLocals = data.data as Row[]
+            setData(oldData => oldData ? {
+                ...oldData,
+                Locals: newLocals
+            } : null)
+
+        } catch (error) {
+            throw new Error('Error al hacer la petición: ' + error)
+        } finally {
+            setLoadingGlobal(false)
+        }
+    }
     const handlePageChange = (page: number) => {
         setAnimating(true)
         setCurrentPage(page)
@@ -120,7 +120,7 @@ export default function Categories() {
         }, 300)
     }
 
-    // Resetear página cuando cambian los datos filtrados
+    // recrear página cuando cambian los datos filtrados
     useEffect(() => {
         setCurrentPage(1)
     }, [Locals])
@@ -132,8 +132,8 @@ export default function Categories() {
     )
 
     return (
-        <>
-            <h4 className="text-4xl text-center mt-12">
+        <section id="locales" className=" pt-22">
+            <h4 className="text-4xl text-center pb-4 " >
                 Selecciona por <b>categorías</b>
             </h4>
 
@@ -148,6 +148,7 @@ export default function Categories() {
                         <SelectReact
                             setVal={listenValCate}
                             name="cate"
+                            value={cateVal ?? ""}
                             options={Cate?.map(({ nameCategory }) => ({
                                 value: nameCategory?.toString() || "Valor no definido",
                                 label: nameCategory?.toString() || "Valor no definido",
@@ -157,22 +158,23 @@ export default function Categories() {
                         <SelectReact
                             setVal={listenValSubCate}
                             name="sub-cate"
+                            value={subCateVal ?? ""}
                             options={SubCate?.map(({ subCategory }) => ({
                                 value: subCategory?.toString() || "Valor no definido",
                                 label: subCategory?.toString() || "Valor no definido",
                             })) || []}
                             placeholder="Sub Categorías"
                         />
-                        <button onClick={resetFilters} type="button" className=" hidden md:block lg:hidden px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700">
+                        <button onClick={resetFilters} type="button" className=" hidden md:block lg:hidden px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700 btn-effect">
                             <RefreshCcw className="size-6" />
                         </button>
                     </div>
                     <div className="flex gap-6">
-                        <button onClick={resetFilters} type="button" className="block md:hidden lg:block px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700">
+                        <button onClick={resetFilters} type="button" className="block md:hidden lg:block px-4 py-2 cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700 btn-effect">
                             <RefreshCcw className="size-6" />
                         </button>
                         <button
-                            className="px-4 flex-1 py-2 font-semibold cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700"
+                            className="px-4 flex-1 py-2 font-semibold cursor-pointer bg-white hover:bg-zinc-200 transition duration-200 rounded-lg shadow ring ring-green-700 btn-effect"
                             type="submit"
                             onClick={handleSubmit}
                         >
@@ -185,7 +187,7 @@ export default function Categories() {
             <section
                 className="m-8 rounded-2xl shadow overflow-hidden"
             >
-                <div className="rounded-2xl min-h-fit h-[50vh] p-8">
+                <div className="rounded-2xl min-h-fit sm:h-[50vh] p-8">
                     {
                         loadingUpdate ? (
                             <LoadingSpinner className="min-w-screen" />
@@ -217,18 +219,16 @@ export default function Categories() {
 
                 {/* Paginación */}
                 {totalItems > 0 && (
-                    <div className="">
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            itemsPerPage={itemsPerPage}
-                            totalItems={totalItems}
-                            onPageChange={handlePageChange}
-                            onItemsPerPageChange={handleItemsPerPageChange}
-                        />
-                    </div>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        itemsPerPage={itemsPerPage}
+                        totalItems={totalItems}
+                        onPageChange={handlePageChange}
+                        onItemsPerPageChange={handleItemsPerPageChange}
+                    />
                 )}
             </section>
-        </>
+        </section>
     )
 }

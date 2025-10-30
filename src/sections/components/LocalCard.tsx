@@ -14,7 +14,7 @@ const LocalCard: React.FC<LocalCardProps> = ({ local, cld }) => {
     return (
         <a
             key={localNumber?.toString() ?? title?.toString()}
-            href={`${title?.toString().toLowerCase().trim().replaceAll(" ", "-")}-${localNumber}`}
+            href={`${title?.toString().toLowerCase().trim().replaceAll(" ", "-")}-${localNumber ?? 'local'}`}
             className="bg-white group/cardLine border border-zinc-300 rounded-xl w-full h-full block shadow-lg px-4 py-2 sm:px-8 sm:py-4 card-hover animate-scale-in"
         >
             <div className="overflow-hidden">
@@ -24,7 +24,7 @@ const LocalCard: React.FC<LocalCardProps> = ({ local, cld }) => {
                     className="rounded-xl scale-105 aspect-square bg-white object-contain"
                 />
             </div>
-            <div className='group-hover/cardLine:w-full w-3xs mx-auto duration-300 h-[1px] bg-zinc-700'></div>
+            <div className='group-hover/cardLine:w-full sm:w-3xs w-full mx-auto duration-300 h-[1px] bg-zinc-700'></div>
             {
                 localNumber?.toString() ? (
                     <p className="text-2xl text-center text-zinc-700 py-2 ">

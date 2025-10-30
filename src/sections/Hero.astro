@@ -121,7 +121,9 @@ const { images } = Astro.props;
     </section>
 </section>
 <!-- algunos locales -->
-<section class="m-8 rounded-4xl z-10 bg-green-500 p-8 overflow-hidden relative">
+<section
+    class="m-8 mb-0 rounded-4xl z-10 bg-green-500 p-8 overflow-hidden relative"
+>
     <FondoBg position="-bottom-16 left-3 " />
     <h3
         class="text-3xl sm:text-4xl font-normal text-pretty text-center text-white tracking-wider xl:px-8 px-0 mb-14"
@@ -140,7 +142,7 @@ const { images } = Astro.props;
             slides={images.slice(3)}
             autoSlide
             visiblePoints
-            client:visible
+            client:only="react"
         />
         <article
             class="mx-auto hidden order-1 sm:order-2 select-none md:ms-auto bg-white p-8 rounded-full xl:grid place-content-center aspect-square md:my-auto"
@@ -148,5 +150,6 @@ const { images } = Astro.props;
             <LogoRosedal fill="black" size={200} />
         </article>
     </div>
-    <p class="sr-only" id="locales"></p>
 </section>
+<!-- <span  class="sr-only size-0 "></span> -->
+<!-- <p class="sr-only" id="locales"></p> -->

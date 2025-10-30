@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({
     const GAP_CLASS = "gap-2";
     const PAGINATION_BUTTON_SIZE = "px-3 py-2";
     const CONTROL_BUTTON_SIZE = "p-2";
-    const CONTAINER_PADDING = "px-6 py-4";
+    const CONTAINER_PADDING = "px-4 py-2 sm:px-8 sm:py-4 ";
     const MARGIN_TOP = "mt-6";
 
     const ITEMS_PER_PAGE_OPTIONS = {
@@ -76,11 +76,10 @@ const Pagination: React.FC<PaginationProps> = ({
     const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
     return (
-        <div className={`flex flex-col lg:flex-row items-center justify-between ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING}  `}>
+        <div className={`flex  items-center justify-center ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING}  `}>
             {/* Controles de paginación */}
-            <div className={`flex items-center mx-auto ${GAP_CLASS}`}>
-                {/* Primera página */}
-                <button
+            {/* Primera página */}
+            {/* <button
                     onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
@@ -91,63 +90,63 @@ const Pagination: React.FC<PaginationProps> = ({
                     title="Primera página"
                 >
                     <ChevronsLeft className={BUTTON_SIZE_CLASS} />
-                </button>
+                </button> */}
 
-                {/* Página anterior */}
+            {/* Página anterior */}
+            <button
+                onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onPageChange(currentPage - 1)
+                }}
+                disabled={currentPage === MIN_PAGE}
+                className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
+                title="Página anterior"
+            >
+                <ChevronLeft className={BUTTON_SIZE_CLASS} />
+            </button>
+
+            {/* Números de página */}
+            {getPageNumbers().map((pageNum) => (
                 <button
+                    key={pageNum}
                     onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
-                        onPageChange(currentPage - 1)
+                        onPageChange(pageNum)
                     }}
-                    disabled={currentPage === MIN_PAGE}
-                    className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
-                    title="Página anterior"
+                    className={`${PAGINATION_BUTTON_SIZE} hidden sm:block rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 ${currentPage === pageNum
+                        ? 'bg-green-500 text-white  font-semibold shadow-lg'
+                        : 'bg-white border border-gray-300 text-gray-700 hover:bg-zinc-200 cursor-pointer transition duration-200'
+                        }`}
                 >
-                    <ChevronLeft className={BUTTON_SIZE_CLASS} />
+                    {pageNum}
                 </button>
+            ))}
 
-                {/* Números de página */}
-                {getPageNumbers().map((pageNum) => (
-                    <button
-                        key={pageNum}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            onPageChange(pageNum)
-                        }}
-                        className={`${PAGINATION_BUTTON_SIZE} rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 ${currentPage === pageNum
-                            ? 'bg-green-500 text-white  font-semibold shadow-lg'
-                            : 'bg-white border border-gray-300 text-gray-700 hover:bg-zinc-200 cursor-pointer transition duration-200'
-                            }`}
-                    >
-                        {pageNum}
-                    </button>
-                ))}
+            {/* Página siguiente */}
+            <button
+                id="next-page-btn"
+                onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    const button = e.currentTarget as HTMLButtonElement;
+                    button.blur(); // Remover foco temporalmente
+                    onPageChange(currentPage + 1)
+                    // Restaurar foco después de un breve delay
+                    setTimeout(() => {
+                        button.focus();
+                    }, 100);
+                }}
+                disabled={currentPage === totalPages}
+                className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
+                title="Página siguiente"
+            >
+                <ChevronRight className={BUTTON_SIZE_CLASS} />
+            </button>
 
-                {/* Página siguiente */}
-                <button
-                    id="next-page-btn"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        const button = e.currentTarget as HTMLButtonElement;
-                        button.blur(); // Remover foco temporalmente
-                        onPageChange(currentPage + 1)
-                        // Restaurar foco después de un breve delay
-                        setTimeout(() => {
-                            button.focus();
-                        }, 100);
-                    }}
-                    disabled={currentPage === totalPages}
-                    className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
-                    title="Página siguiente"
-                >
-                    <ChevronRight className={BUTTON_SIZE_CLASS} />
-                </button>
-
-                {/* Última página */}
-                <button
+            {/* Última página */}
+            {/* <button
                     onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
@@ -158,8 +157,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     title="Última página"
                 >
                     <ChevronsRight className={BUTTON_SIZE_CLASS} />
-                </button>
-            </div>
+                </button> */}
         </div>
     );
 };
