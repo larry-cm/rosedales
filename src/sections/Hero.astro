@@ -33,13 +33,13 @@ const { images } = Astro.props;
 <!-- primer carousel -->
 <section class="relative">
     <div class="bg-green-500">
-        <div class="bg-white h-45 md:h-[85dvh]">
+        <div class="bg-white h-[90vh]">
             <Carousel
                 type="img"
                 slides={images}
                 visibleSlides={1}
-                classImg="size-full object-contain"
-                autoSlide
+                classImg="size-full"
+                autoSlide={false}
                 visiblePoints
                 client:visible
             />
@@ -78,45 +78,40 @@ const { images } = Astro.props;
     >
         <!-- cards de locales principales -->
         {
-            images
-                .concat(images)
-                .slice(0, 3)
-                .map(({ url, alt, local }) => (
-                    <article class="group/link border border-zinc-300 shadow rounded-2xl w-full max-w-xs px-8 py-4">
+            images.slice(1, 7).map(({ url, alt, local }) => (
+                <article class="group/link flex flex-col border border-zinc-300 shadow rounded-2xl w-full max-w-xs px-8 py-4">
+                    <a
+                        href={
+                            alt.toLowerCase().trim().replaceAll(" ", "-") +
+                            `-${local}`
+                        }
+                        class="scale-95 group-hover/link:scale-100 flex-1 transition duration-200 overflow-hidden flex rounded-2xl select-none w-full"
+                    >
+                        <AdvancedImage
+                            width={200}
+                            height={200}
+                            loading="lazy"
+                            cldImg={cld.image(url)}
+                            alt={alt}
+                            className="w-auto aspect-square md:w-full h-36 object-contain"
+                        />
+                    </a>
+                    <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
+                        <h3 class="text-2xl font-semibold tracking-wide">
+                            {alt}
+                        </h3>
                         <a
                             href={
                                 alt.toLowerCase().trim().replaceAll(" ", "-") +
                                 `-${local}`
                             }
-                            class="group-hover/link:scale-105 transition duration-300 overflow-hidden flex rounded-2xl select-none w-fit mx-auto"
+                            class="underline text-lg text-zinc-700 hover:text-green-500 group-hover/link:text-green-500 transition duration-200"
                         >
-                            <AdvancedImage
-                                width={200}
-                                height={200}
-                                loading="lazy"
-                                cldImg={cld.image(url)}
-                                alt={alt}
-                                class="h-44 w-auto aspect-video  md:w-full object-cover"
-                            />
+                            Ir a conocer mas.
                         </a>
-                        <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
-                            <h3 class="text-2xl font-semibold tracking-wide">
-                                {alt}
-                            </h3>
-                            <a
-                                href={
-                                    alt
-                                        .toLowerCase()
-                                        .trim()
-                                        .replaceAll(" ", "-") + `-${local}`
-                                }
-                                class="underline text-lg text-zinc-700 hover:text-green-500  transition duration-200"
-                            >
-                                Ir a conocer mas.
-                            </a>
-                        </div>
-                    </article>
-                ))
+                    </div>
+                </article>
+            ))
         }
     </section>
 </section>
@@ -139,7 +134,7 @@ const { images } = Astro.props;
             style="rounded-2xl order-2 sm:order-1 w-full"
             chevronClass="size-6 md:size-8 block btn-effect hover:stroke-zinc-300 backdrop-blur-md bg-green-500 text-white rounded-xl hover:stroke-green-500 transition duration-300"
             classImg="bg-white object-contain h-64 aspect-video rounded-2xl p-4"
-            slides={images.slice(3)}
+            slides={images}
             autoSlide
             visiblePoints
             client:only="react"
@@ -151,5 +146,3 @@ const { images } = Astro.props;
         </article>
     </div>
 </section>
-<!-- <span  class="sr-only size-0 "></span> -->
-<!-- <p class="sr-only" id="locales"></p> -->
