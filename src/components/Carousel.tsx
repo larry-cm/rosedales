@@ -2,10 +2,10 @@ import useCarousel from "../hooks/useCarousel";
 import PointsSlides from "./PointsSlides";
 import { type UseCarousel } from "../type/global";
 import { ChevronsCarousel } from "./ChevronsCarousel";
-import { AdvancedImage, responsive } from '@cloudinary/react';
+import { AdvancedImage } from '@cloudinary/react';
 import { cld } from "@services/cloudinary";
 import { pad } from "@cloudinary/url-gen/actions/resize";
-import { ar1X1, ar4X3 } from "@cloudinary/url-gen/qualifiers/aspectRatio";
+import { ar4X3 } from "@cloudinary/url-gen/qualifiers/aspectRatio";
 import { compass } from "@cloudinary/url-gen/qualifiers/gravity";
 import { generativeFill } from "@cloudinary/url-gen/qualifiers/background";
 
@@ -29,6 +29,7 @@ export default function Carousel({
     img: (slides && slides.map(({ url: slide, alt }, i) => (
       <AdvancedImage
         key={i}
+        alt={alt}
         className={`${classImg} `}
         style={{ minWidth: `calc(${100 / visibleSlidesMacro}% - ${visibleSlidesMacro === 3 ? "16px" : "0px"})` }}
         cldImg={cld.image(slide).resize(
