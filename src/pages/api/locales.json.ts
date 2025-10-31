@@ -66,18 +66,26 @@ ORDER BY
     const { rows } = await turso.execute({
         sql: `
 SELECT DISTINCT
-l.*
+  l.*
 FROM
   local l
   JOIN local_subcategory lsbc ON l.id = lsbc.local_id
-  JOIN local_category lc on l.id = lc.local_id
   JOIN subcategory sb ON lsbc.subcategory_id = sb.id
-  JOIN category c ON sb.category_id = c.id
-WHERE c.name = ? AND sb.name = ?
+WHERE
+  sb.name = ?
+  AND l.id = (
+   SELECT DISTINCT
+  local_id
+FROM local l
+ JOIN local_category lc on l.id= lc.local_id
+  JOIN category c ON lc.category_id = c.id
+WHERE
+  c.name = ?
+  )
 ORDER BY
   l.local ASC;
-            `,
-        args: [cate, subCate]
+  `,
+        args: [subCate, cate]
     })
 
     return new Response(

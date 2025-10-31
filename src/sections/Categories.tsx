@@ -185,7 +185,7 @@ export default function Categories() {
             </div>
 
             <section
-                className="m-8 rounded-2xl shadow overflow-hidden"
+                className="m-8 rounded-2xl  overflow-hidden"
             >
                 <div className="rounded-2xl min-h-fit sm:h-[50vh] p-8">
                     {

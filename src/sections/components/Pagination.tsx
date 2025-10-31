@@ -145,19 +145,6 @@ const Pagination: React.FC<PaginationProps> = ({
                 <ChevronRight className={BUTTON_SIZE_CLASS} />
             </button>
 
-            {/* Última página */}
-            {/* <button
-                    onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        onPageChange(totalPages)
-                    }}
-                    disabled={currentPage === totalPages}
-                    className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
-                    title="Última página"
-                >
-                    <ChevronsRight className={BUTTON_SIZE_CLASS} />
-                </button> */}
         </div>
     );
 };
