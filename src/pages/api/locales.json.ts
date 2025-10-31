@@ -4,13 +4,13 @@ import { turso } from "@services/turso";
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, locals, redirect }) => {
-    const data = await request.formData();
-    const cate = data.get("cate") as string;
-    const subCate = data.get("sub-cate") as string;
+  const data = await request.formData();
+  const cate = data.get("cate") as string;
+  const subCate = data.get("sub-cate") as string;
 
-    if (cate && !subCate) {
-        const { rows } = await turso.execute({
-            sql: `
+  if (cate && !subCate) {
+    const { rows } = await turso.execute({
+      sql: `
 SELECT
   *
 FROM
@@ -22,18 +22,18 @@ WHERE
 ORDER BY
   l.local ASC;
             `,
-            args: [cate]
-        })
-        return new Response(
-            JSON.stringify({
-                path: new URL(request.url).pathname,
-                data: rows,
-            }),
-        );
-    }
-    if (!cate && subCate) {
-        const { rows } = await turso.execute({
-            sql: `
+      args: [cate]
+    })
+    return new Response(
+      JSON.stringify({
+        path: new URL(request.url).pathname,
+        data: rows,
+      }),
+    );
+  }
+  if (!cate && subCate) {
+    const { rows } = await turso.execute({
+      sql: `
 SELECT distinct
   l.*
 FROM
@@ -44,27 +44,27 @@ WHERE sb.name = ?
 ORDER BY
   l.local ASC;
                 `,
-            args: [subCate]
-        })
+      args: [subCate]
+    })
 
-        return new Response(
-            JSON.stringify({
-                path: new URL(request.url).pathname,
-                data: rows,
-            }),
-        );
-    }
-    if (!cate || !subCate) {
-        return new Response(
-            JSON.stringify({
-                path: new URL(request.url).pathname,
-                data: [],
-            }),
-        );
-    }
+    return new Response(
+      JSON.stringify({
+        path: new URL(request.url).pathname,
+        data: rows,
+      }),
+    );
+  }
+  if (!cate || !subCate) {
+    return new Response(
+      JSON.stringify({
+        path: new URL(request.url).pathname,
+        data: [],
+      }),
+    );
+  }
 
-    const { rows } = await turso.execute({
-        sql: `
+  const { rows } = await turso.execute({
+    sql: `
 SELECT DISTINCT
   l.*
 FROM
@@ -73,25 +73,25 @@ FROM
   JOIN subcategory sb ON lsbc.subcategory_id = sb.id
 WHERE
   sb.name = ?
-  AND l.id = (
-   SELECT DISTINCT
-  local_id
+  AND l.id IN (
+   SELECT 
+  l.id
 FROM local l
- JOIN local_category lc on l.id= lc.local_id
-  JOIN category c ON lc.category_id = c.id
+ JOIN local_category lc on l.id = lc.local_id
+ JOIN category c ON lc.category_id = c.id
 WHERE
   c.name = ?
   )
 ORDER BY
   l.local ASC;
   `,
-        args: [subCate, cate]
-    })
+    args: [subCate, cate]
+  })
 
-    return new Response(
-        JSON.stringify({
-            path: new URL(request.url).pathname,
-            data: rows,
-        }),
-    );
+  return new Response(
+    JSON.stringify({
+      path: new URL(request.url).pathname,
+      data: rows,
+    }),
+  );
 };
