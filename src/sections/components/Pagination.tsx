@@ -4,24 +4,17 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'react-fe
 interface PaginationProps {
     currentPage: number;
     totalPages: number;
-    itemsPerPage: number;
-    totalItems: number;
     onPageChange: (page: number) => void;
-    onItemsPerPageChange: (items: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
     currentPage,
     totalPages,
-    itemsPerPage,
-    totalItems,
     onPageChange,
-    onItemsPerPageChange
 }) => {
     // Constantes para evitar magic numbers
     const MAX_VISIBLE_PAGES = 5;
     const MIN_PAGE = 1;
-    const FIRST_PAGE = 1;
     const ANIMATION_DURATION_MS = 300;
     const BUTTON_SIZE_CLASS = "w-4 h-4";
     const GAP_CLASS = "gap-2";
@@ -29,19 +22,6 @@ const Pagination: React.FC<PaginationProps> = ({
     const CONTROL_BUTTON_SIZE = "p-2";
     const CONTAINER_PADDING = "px-4 py-2 sm:px-8 sm:py-4 ";
     const MARGIN_TOP = "mt-6";
-
-    const ITEMS_PER_PAGE_OPTIONS = {
-        SMALL: 3,
-        MEDIUM: 6,
-        LARGE: 9,
-        EXTRA_LARGE: 12
-    };
-
-    // Filtrar opciones disponibles basadas en el total de elementos
-    const getAvailableOptions = () => {
-        const options = Object.values(ITEMS_PER_PAGE_OPTIONS);
-        return options.filter(option => totalItems >= option);
-    };
 
     const TAILWIND_CLASSES = {
         BUTTON_BORDER: "border border-gray-300",
@@ -52,7 +32,7 @@ const Pagination: React.FC<PaginationProps> = ({
     };
 
     // Calcular rango de páginas a mostrar
-    const halfOfMaxVisible = Math.floor(MAX_VISIBLE_PAGES / 2);
+    const halfOfMaxVisible = 5;
     let startPage = Math.max(MIN_PAGE, currentPage - halfOfMaxVisible);
     let endPage = Math.min(totalPages, startPage + MAX_VISIBLE_PAGES - 1);
 
@@ -72,26 +52,9 @@ const Pagination: React.FC<PaginationProps> = ({
         return pageNumbers;
     };
 
-    const startItem = (currentPage - 1) * itemsPerPage + 1;
-    const endItem = Math.min(currentPage * itemsPerPage, totalItems);
-
     return (
         <div className={`flex  items-center justify-center ${GAP_CLASS} ${MARGIN_TOP} ${CONTAINER_PADDING}  `}>
             {/* Controles de paginación */}
-            {/* Primera página */}
-            {/* <button
-                    onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        onPageChange(FIRST_PAGE)
-                    }}
-                    disabled={currentPage === MIN_PAGE}
-                    className={`${CONTROL_BUTTON_SIZE} rounded-lg ${TAILWIND_CLASSES.BUTTON_BORDER} ${TAILWIND_CLASSES.BUTTON_DISABLED} ${TAILWIND_CLASSES.BUTTON_HOVER} ${TAILWIND_CLASSES.TRANSITION} ${TAILWIND_CLASSES.BUTTON_FOCUS}`}
-                    title="Primera página"
-                >
-                    <ChevronsLeft className={BUTTON_SIZE_CLASS} />
-                </button> */}
-
             {/* Página anterior */}
             <button
                 onClick={(e) => {
@@ -144,7 +107,6 @@ const Pagination: React.FC<PaginationProps> = ({
             >
                 <ChevronRight className={BUTTON_SIZE_CLASS} />
             </button>
-
         </div>
     );
 };

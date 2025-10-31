@@ -9,6 +9,28 @@ import SelectReact from "@components/SelectReact";
 import type { Row } from "@libsql/client";
 import type { TypeCategories } from "@type/global";
 
+function useResponsiveViewport() {
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+    useEffect(() => {
+        function updateItemsPerPage() {
+            const width = window.innerWidth;
+            if (width < 640) { // sm
+                setItemsPerPage(3);
+            } else if (width >= 640 && width < 1024) { // md
+                setItemsPerPage(6);
+            } else { // lg and above
+                setItemsPerPage(8);
+            }
+        }
+        updateItemsPerPage(); // Llamar a la función al montar el componente
+        window.addEventListener("resize", updateItemsPerPage);
+        return () => {
+            window.removeEventListener("resize", updateItemsPerPage);
+        };
+    }, []);
+    return itemsPerPage;
+}
+
 export default function Categories() {
     const [cateVal, setCateVal] = useState<string | null>(null)
     const [subCateVal, setSubCateVal] = useState<string | null>(null)
@@ -19,7 +41,7 @@ export default function Categories() {
 
     // Estados para paginación
     const [currentPage, setCurrentPage] = useState(1)
-    const [itemsPerPage, setItemsPerPage] = useState(3)
+    const itemsPerPage = useResponsiveViewport()
     const [animating, setAnimating] = useState(false)
 
     function getInitial(): Promise<TypeCategories> {
@@ -109,15 +131,6 @@ export default function Categories() {
         setTimeout(() => {
             setAnimating(false)
         }, 700) // Tiempo suficiente para que termine toda la animación
-    }
-
-    const handleItemsPerPageChange = (newItemsPerPage: number) => {
-        setItemsPerPage(newItemsPerPage)
-        setCurrentPage(1) // Resetear a la primera página
-        setAnimating(true)
-        setTimeout(() => {
-            setAnimating(false)
-        }, 300)
     }
 
     // recrear página cuando cambian los datos filtrados
@@ -222,10 +235,7 @@ export default function Categories() {
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
-                        itemsPerPage={itemsPerPage}
-                        totalItems={totalItems}
                         onPageChange={handlePageChange}
-                        onItemsPerPageChange={handleItemsPerPageChange}
                     />
                 )}
             </section>
