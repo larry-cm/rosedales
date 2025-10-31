@@ -134,10 +134,10 @@ const { images } = Astro.props;
             style="rounded-2xl order-2 sm:order-1 w-full"
             chevronClass="size-6 md:size-8 block btn-effect hover:stroke-zinc-300 backdrop-blur-md bg-green-500 text-white rounded-xl hover:stroke-green-500 transition duration-300"
             classImg="bg-white object-contain h-64 aspect-video rounded-2xl p-4"
-            slides={images}
+            slides={images.slice(1)}
             autoSlide
             visiblePoints
-            client:only="react"
+            client:visible
         />
         <article
             class="mx-auto hidden order-1 sm:order-2 select-none md:ms-auto bg-white p-8 rounded-full xl:grid place-content-center aspect-square md:my-auto"
