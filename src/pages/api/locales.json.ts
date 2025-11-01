@@ -1,7 +1,7 @@
 
 import type { APIRoute } from "astro";
 import { turso } from "@services/turso";
-export const prerender = false;
+// export const prerender = false;
 
 export const POST: APIRoute = async ({ request, locals, redirect }) => {
   const data = await request.formData();
