@@ -200,7 +200,7 @@ export default function Categories() {
             <section
                 className="m-8 rounded-2xl  overflow-hidden"
             >
-                <div className="rounded-2xl min-h-fit sm:h-[50vh] p-8">
+                <div className="rounded-2xl sm:min-h-[100vh] p-8">
                     {
                         loadingUpdate ? (
                             <LoadingSpinner className="min-w-screen" />
