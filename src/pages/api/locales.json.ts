@@ -95,3 +95,10 @@ ORDER BY
     }),
   );
 };
+export const GET: APIRoute = async ({ }) => {
+  return new Response(
+    JSON.stringify({ message: "Method not allowed" }),
+    { status: 405 }
+  );
+
+}

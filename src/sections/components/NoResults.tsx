@@ -1,4 +1,3 @@
-import React from 'react';
 import { XSquare } from 'react-feather';
 
 const NoResults: React.FC = () => {
