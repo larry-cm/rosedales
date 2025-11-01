@@ -8,7 +8,8 @@ import { pad } from "@cloudinary/url-gen/actions/resize";
 import { ar4X3 } from "@cloudinary/url-gen/qualifiers/aspectRatio";
 import { compass } from "@cloudinary/url-gen/qualifiers/gravity";
 import { generativeFill } from "@cloudinary/url-gen/qualifiers/background";
-
+import { responsive, lazyload } from "@cloudinary/react";
+import { upscale } from "@cloudinary/url-gen/actions/effect";
 export default function Carousel({
   slides,
   autoSlide = false,
@@ -30,14 +31,17 @@ export default function Carousel({
       <AdvancedImage
         key={i}
         alt={alt}
-        className={`${classImg} `}
+        className={`${classImg}`}
         style={{ minWidth: `calc(${100 / visibleSlidesMacro}% - ${visibleSlidesMacro === 3 ? "16px" : "0px"})` }}
         cldImg={cld.image(slide).resize(
           pad()
             .aspectRatio(ar4X3())
             .gravity(compass("center"))
             .background(generativeFill())
-        )} />
+        )
+          .effect(upscale())}
+        plugins={[lazyload(), responsive({ steps: 100 })]}
+      />
     ))),
     mp4: slides && slides.map(({ url, alt }, i) => (
       <AdvancedImage key={i} cldImg={cld.video(url)} title={alt} className="object-cover rounded-2xl aspect-video min-h-44" autoPlay loop muted controls style={{ minWidth: `${100 / visibleSlidesMacro}%` }}></AdvancedImage>)

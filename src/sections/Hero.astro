@@ -33,7 +33,7 @@ const { images } = Astro.props;
 <!-- primer carousel -->
 <section class="relative">
     <div class="bg-green-500">
-        <div class="bg-white h-[90vh]">
+        <div class="bg-white md:h-[90vh]">
             <Carousel
                 type="img"
                 slides={images}
@@ -93,7 +93,7 @@ const { images } = Astro.props;
                             loading="lazy"
                             cldImg={cld.image(url)}
                             alt={alt}
-                            className="w-auto aspect-square md:w-full h-36 object-contain"
+                            className="w-full aspect-square h-36 object-contain"
                         />
                     </a>
                     <div class="mt-4 text-center drop-shadow-xl drop-shadow-zinc-900/30">
