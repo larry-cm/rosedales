@@ -17,11 +17,11 @@ const LocalCard: React.FC<LocalCardProps> = ({ local, cld }) => {
             href={`${title?.toString().toLowerCase().trim().replaceAll(" ", "-")}-${localNumber ?? 'local'}`}
             className="bg-white group/cardLine border border-zinc-300 rounded-xl w-full h-full block shadow-lg px-4 py-2 sm:px-8 sm:py-4 card-hover animate-scale-in"
         >
-            <div className="overflow-hidden" >
+            <div className="overflow-hidden  aspect-square" >
                 <AdvancedImage
                     cldImg={cld.image(logo?.toString())}
                     alt={title?.toString()}
-                    className="rounded-xl scale-105 aspect-square min-h-64 bg-white object-contain"
+                    className="rounded-xl scale-105 min-h-64 bg-white object-contain"
                 />
             </div>
             <div className='group-hover/cardLine:w-full sm:w-3xs w-full mx-auto duration-300 h-[1px] bg-zinc-700'></div>

@@ -226,21 +226,23 @@ export default function Categories() {
             <section className="py-10" >
 
                 <GreenCard >
-                    <div className="flex flex-col sm:flex-row items-center gap-6">
-                        <h4 className="capitalize text-4xl text-white max-w-xs font-semibold">
-                            Edificio Centro Comercial Rosedal
+                    <div className="flex flex-wrap flex-col sm:flex-row items-center content-center gap-6">
+                        <h4 className="capitalize text-center sm:text-start  text-3xl sm:text-4xl text-white w-full max-w-full xl:max-w-xs text-pretty font-semibold">
+                            <span className="hidden md:inline-block">Edificio</span> Centro Comercial Rosedal
                         </h4>
 
-                        <BtnSelection popOvers={LOCALES_COMERCIALES} >
-                            <>
-                                {!Array.isArray(viewCS) ? viewCS : NOMBRES_BOTONES.LOCALES_COMERCIALES}
-                            </>
-                        </BtnSelection>
-                        <BtnSelection popOvers={TORRES_EMPRESARIALES} >
-                            <>
-                                {NOMBRES_BOTONES.TORRES_EMPRESARIALES}
-                            </>
-                        </BtnSelection>
+                        <div className="flex flex-col sm:flex-row gap-6  ">
+                            <BtnSelection popOvers={LOCALES_COMERCIALES} >
+                                <>
+                                    {!Array.isArray(viewCS) ? viewCS : NOMBRES_BOTONES.LOCALES_COMERCIALES}
+                                </>
+                            </BtnSelection>
+                            <BtnSelection popOvers={TORRES_EMPRESARIALES} >
+                                <>
+                                    {NOMBRES_BOTONES.TORRES_EMPRESARIALES}
+                                </>
+                            </BtnSelection>
+                        </div>
 
                     </div>
                 </GreenCard>
@@ -264,6 +266,7 @@ export default function Categories() {
                 {"Mas comodidad y mas servicios para sus clientes"}
             </Separator>
             <span id="mas-para-compartir"></span>
+
             <section className="py-10 ">
                 <GreenCard>
                     <form
@@ -272,7 +275,7 @@ export default function Categories() {
                         method="POST"
                         className="flex flex-col lg:flex-row items-center justify-between gap-6"
                     >
-                        <h4 className="font-semibold text-4xl text-white max-w-xs">
+                        <h4 className="font-semibold text-center sm:text-start text-3xl sm:text-4xl text-white lg:max-w-xs">
                             Mas para compartir
                         </h4>
                         <div className="w-full md:w-4/5 l flex flex-col md:flex-row gap-6">
@@ -386,7 +389,7 @@ function BtnSelection({
         <div className="relative">
             <button
                 ref={buttonRef}
-                className="capitalize bg-zinc-100 outline-none rounded-lg ring ring-green-700 px-4 py-2 max-w-xs flex justify-between items-center gap-4 min-w-fit text-start lg:min-w-xs"
+                className="capitalize bg-zinc-100 outline-none rounded-lg ring ring-green-700 px-4 py-2 max-w-xs flex justify-between items-center gap-4 min-w-full text-start  lg:min-w-xs text-lg sm:text-xl"
                 type="button"
             >
                 {children ?? "locales comerciales"}
@@ -402,7 +405,7 @@ function BtnSelection({
                             <li key={text}>
                                 <button
                                     onClick={() => popOverHandleClick(action)}
-                                    className="w-full capitalize text-left px-4 py-2 text-gray-700 hover:bg-gray-100  hover:scale-102 transition duration-300 hover:text-gray-900 focus:outline-none focus:bg-gray-100"
+                                    className="w-full capitalize text-left px-4 py-2 text-gray-700 hover:bg-gray-100  hover:scale-102 transition duration-300 hover:text-gray-900 focus:outline-none focus:bg-gray-100 text-lg sm:text-xl"
                                 >
                                     {text}
                                 </button>
@@ -419,7 +422,7 @@ function SectionView({ title, children, loading }: { title: string, loading: boo
     if (title.toLowerCase() === 'todos') return
     return (
         <article className="m-8 px-8 rounded-lg">
-            <h5 className="text-4xl mb-6 mt-14 bg-zinc-100 px-8 py-4 w-fit rounded-lg shadow-md">
+            <h5 className="text-2xl sm:text-4xl mb-6 mt-14 bg-zinc-100 px-8 py-4 w-fit rounded-lg shadow-md">
                 {title ?? "Sub sección a mostrar"}
             </h5>
 

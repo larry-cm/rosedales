@@ -95,7 +95,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
             <button
                 ref={buttonRef}
                 type="button"
-                className="bg-zinc-100 outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 min-w-fit text-start lg:min-w-xs "
+                className="bg-zinc-100 text-nowrap outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 min-w-full text-start lg:min-w-xs "
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={displayText}
@@ -117,7 +117,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
 
             {(isOpen && options.length > 0) && (
                 <div
-                    className="absolute top-full left-0 right-0 mt-1 bg-white border border-zinc-300 rounded-lg shadow-lg z-20 max-h-60 overflow-y-auto min-w-fit snap-y snap-mandatory sm:snap-none overflow-hidden"
+                    className="absolute top-full left-0 right-0 mt-1 bg-white border border-zinc-300 rounded-lg shadow-lg z-20 max-h-60 overflow-y-auto min-w-full snap-y snap-mandatory sm:snap-none overflow-hidden"
                     role="listbox"
                     aria-label={`Opciones para ${placeholder}`}
                 >
