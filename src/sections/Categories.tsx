@@ -223,7 +223,7 @@ export default function Categories() {
 
     return (
         <>
-            <section className="py-10" >
+            <section className="py-10 max-w-7xl mx-auto" >
 
                 <GreenCard >
                     <div className="flex flex-wrap flex-col sm:flex-row items-center content-center gap-6">
@@ -267,7 +267,7 @@ export default function Categories() {
             </Separator>
             <span id="mas-para-compartir"></span>
 
-            <section className="py-10 ">
+            <section className="py-10  max-w-7xl mx-auto">
                 <GreenCard>
                     <form
                         onSubmit={(e) => { e.preventDefault() }}
