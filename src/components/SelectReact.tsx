@@ -95,7 +95,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
             <button
                 ref={buttonRef}
                 type="button"
-                className="bg-zinc-100 text-nowrap outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 min-w-full text-start lg:min-w-xs "
+                className="bg-zinc-100 sm:text-nowrap outline-none rounded-lg ring ring-green-700 px-4 py-2 w-full flex justify-between items-center gap-4 min-w-full text-start lg:min-w-xs "
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
                 aria-label={displayText}
