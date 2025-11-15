@@ -226,7 +226,7 @@ export default function Categories() {
             <section className="py-10" >
 
                 <GreenCard >
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
                         <h4 className="capitalize text-4xl text-white max-w-xs font-semibold">
                             Edificio Centro Comercial Rosedal
                         </h4>
@@ -419,7 +419,7 @@ function SectionView({ title, children, loading }: { title: string, loading: boo
     if (title.toLowerCase() === 'todos') return
     return (
         <article className="m-8 px-8 rounded-lg">
-            <h5 className="text-4xl mb-6 mt-14 bg-zinc-100 px-8 py-4 w-fit rounded-lg">
+            <h5 className="text-4xl mb-6 mt-14 bg-zinc-100 px-8 py-4 w-fit rounded-lg shadow-md">
                 {title ?? "Sub sección a mostrar"}
             </h5>
 
