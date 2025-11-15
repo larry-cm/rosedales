@@ -2,12 +2,14 @@ import type { JSX } from "astro/jsx-runtime";
 
 export default function Separator({ children }: { children?: JSX.Element }) {
     return (
-        <article className="*:py-2 py-6 px-4 sm:py-12 flex gap-4 items-center animation-go-text h-fit bg-green-500 shadow-lg">
-            <p className="text-3xl sm:text-5xl text-end w-1/2 text-white font-bold">50 años</p>
-            <div className="h-20 w-[2px] rounded-xl shadow bg-black"></div>
-            <p className="text-xl sm:text-4xl w-1/2 max-w-lg text-pretty font-normal text-white">
-                {children ?? "Ofreciendo estilo y calidad en calzado."}
-            </p>
+        <article className=" h-fit bg-green-500 shadow-lg">
+            <div className="animation-go-text *:py-2 py-6 px-4 sm:py-12 flex gap-4 items-center bg-transparent ">
+                <p className="text-3xl sm:text-5xl text-end w-1/2 text-white font-bold">50 años</p>
+                <div className="h-20 w-[2px] rounded-xl shadow bg-black"></div>
+                <p className="text-xl sm:text-4xl w-1/2 max-w-lg text-pretty font-normal text-white">
+                    {children ?? "Ofreciendo estilo y calidad en calzado."}
+                </p>
+            </div>
         </article>
 
     )
