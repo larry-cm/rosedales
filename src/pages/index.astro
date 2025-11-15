@@ -4,29 +4,12 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "@sections/Hero.astro";
 import Nosotros from "@sections/Nosotros.astro";
 import Categories from "@sections/Categories";
-// petición para las imágenes
-import { type objetosSlides } from "@type/global";
-import { turso } from "@services/turso";
-
-let IMAGES: objetosSlides = [{ url: "", alt: "" }];
-try {
-  const { rows } = await turso.execute({
-    sql: "select id,logo,title,local from local where logo is not null order by id DESC;",
-  });
-  IMAGES = rows.map(({ logo: url, title: alt, local }) => ({
-    url: url?.toString() ?? "",
-    alt: alt?.toString() ?? "",
-    local: parseInt(local?.toString() ?? ""),
-  }));
-} catch (error) {
-  throw new Error(
-    "Error al intentar capturar las imágenes del primer carousel" + error,
-  );
-}
+import Calendario from "@sections/Calendario.astro";
 ---
 
 <Layout>
-  <Hero images={IMAGES} />
+  <Hero />
+  <Calendario />
   <Categories client:idle />
-  <Nosotros images={IMAGES} />
+  <Nosotros />
 </Layout>

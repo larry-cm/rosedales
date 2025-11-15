@@ -2,12 +2,9 @@
 import Carousel from "../components/Carousel";
 import FondoBg from "../components/FondoBg.astro";
 import LogoRosedal from "../assets/LogoRosedal.astro";
-import type { objetosSlides } from "@type/global";
+import { getImages } from "@services/data";
 
-interface Props {
-    images: objetosSlides;
-}
-const { images } = Astro.props;
+const images = await getImages();
 ---
 
 <section class="p-8 overflow-x-hidden">

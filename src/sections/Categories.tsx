@@ -30,8 +30,7 @@ function useResponsiveViewport() {
     }, []);
     return itemsPerPage;
 }
-
-export default function Categories() {
+function usePagination() {
     const [cateVal, setCateVal] = useState<string | null>(null)
     const [subCateVal, setSubCateVal] = useState<string | null>(null)
     const [loadingGlobal, setLoadingGlobal] = useState<boolean>(false)
@@ -55,13 +54,14 @@ export default function Categories() {
                 throw new Error('Error al hacer la petición: ' + error)
             })
     }
-    async function getAllDataCategories() {
-        setLoadingGlobal(true)
-        setData(await getInitial())
-        setLoadingGlobal(false)
-    }
+
 
     useEffect(() => {
+        async function getAllDataCategories() {
+            setLoadingGlobal(true)
+            setData(await getInitial())
+            setLoadingGlobal(false)
+        }
         getAllDataCategories()
             .then(res => res)
             .catch(e => { throw new Error(e) })
@@ -100,29 +100,31 @@ export default function Categories() {
     const endIndex = startIndex + itemsPerPage
     const currentItems = Locals?.slice(startIndex, endIndex) ?? []
 
-
     async function handleSubmit() {
-        if (!cateVal && !subCateVal) return
-        let formData = new FormData()
-        formData.append('cate', cateVal ?? "")
-        formData.append('sub-cate', subCateVal ?? "")
-        try {
-            setLoadingUpdate(true)
-            const res = await fetch("api/locales.json", { method: "POST", body: formData })
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-            const data = await res.json()
-            setLoadingUpdate(false)
-            const newLocals = data.data as Row[]
-            setData(oldData => oldData ? {
-                ...oldData,
-                Locals: newLocals
-            } : null)
+        async function getLocals() {
+            if (!cateVal && !subCateVal) return
+            let formData = new FormData()
+            formData.append('cate', cateVal ?? "")
+            formData.append('sub-cate', subCateVal ?? "")
+            try {
+                setLoadingUpdate(true)
+                const res = await fetch("api/locales.json", { method: "POST", body: formData })
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+                const data = await res.json()
+                setLoadingUpdate(false)
+                const newLocals = data.data as Row[]
+                setData(oldData => oldData ? {
+                    ...oldData,
+                    Locals: newLocals
+                } : null)
 
-        } catch (error) {
-            throw new Error('Error al hacer la petición: ' + error)
-        } finally {
-            setLoadingGlobal(false)
+            } catch (error) {
+                throw new Error('Error al hacer la petición: ' + error)
+            } finally {
+                setLoadingGlobal(false)
+            }
         }
+        await getLocals()
     }
     const handlePageChange = (page: number) => {
         setAnimating(true)
@@ -138,25 +140,64 @@ export default function Categories() {
         setCurrentPage(1)
     }, [Locals])
 
+    return {
+        loadingGlobal,
+        loadingUpdate,
+        cateVal,
+        Cate,
+        SubCate,
+        subCateVal,
+        Locals,
+        animating,
+        currentItems,
+        totalItems,
+        currentPage,
+        totalPages,
+        handlePageChange,
+        resetFilters,
+        listenValCate,
+        listenValSubCate,
+        handleSubmit
+    }
+}
+export default function Categories() {
+    const { loadingGlobal,
+        loadingUpdate,
+        cateVal,
+        Cate,
+        SubCate,
+        subCateVal,
+        Locals,
+        animating,
+        currentItems,
+        totalItems,
+        currentPage,
+        totalPages,
+        handlePageChange,
+        resetFilters,
+        listenValCate,
+        listenValSubCate,
+        handleSubmit } = usePagination()
+
     if (loadingGlobal) return (
-        <div className="overflow-hidden min-h-screen">
+        <div className="overflow-hidden min-h-screen flex justify-center items-center">
             <LoadingSpinner className="min-w-screen" />
         </div>
     )
 
     return (
-        <section id="locales" className=" pt-22">
-            <h4 className="text-4xl text-center pb-4 " >
-                Selecciona por <b>categorías</b>
-            </h4>
+        <section id="locales" className=" pt-10">
 
-            <div className="p-8 m-8 mt-10 rounded-2xl shadow text-xl bg-green-500">
+            <div className="p-8 m-16 mt-10 rounded-2xl shadow text-xl bg-green-500">
                 <form
                     onSubmit={(e) => { e.preventDefault() }}
                     action="api/locales.json"
                     method="POST"
                     className="flex flex-col lg:flex-row justify-between gap-6"
                 >
+                    <h4 className="font-semibold text-4xl text-white max-w-xs">
+                        Edificio Centro Comercial Rosedal
+                    </h4>
                     <div className="w-full md:w-4/5 l flex flex-col md:flex-row gap-6">
                         <SelectReact
                             setVal={listenValCate}

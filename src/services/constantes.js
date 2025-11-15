@@ -1,6 +1,6 @@
 import videoMp4 from "../assets/videos/videosCarousel.mp4";
 // constantes del header
-export const LINK_PAGE = ["Promociones", "Locales", "Contáctenos"]
+export const LINK_PAGE = ["Eventos", " Locales comerciales", "Mas para compartir", "Contáctenos"]
 export const SOCIAL_MEDIA = ["Facebook", "Instagram", "LinkedIn"]
 export const URL_LOGO = "/rosedal-logo.svg"
 // constantes del carrusel
