@@ -7,24 +7,29 @@ interface Props {
 const { socialMedia = [Facebook, Instagram, Linkedin] } = Astro.props;
 ---
 
-<section class="flex flex-col md:flex-row sm:gap-44 gap-6 p-8">
+<section
+    class="flex flex-col md:flex-row sm:gap-44 gap-6 p-8 max-w-7xl mx-auto"
+>
     <article class="flex-1 order-2 md:order-1">
         <h6
             class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize"
         >
             Acerca de nosotros
         </h6>
-        <p class="text-lg space-y-[1lh] text-zinc-700 my-6">
+        <p class="text-lg text-zinc-700 my-[1lh]">
             Somos un centro comercial comprometido con tu bienestar y comodidad.
             Nuestra misión es ofrecer un espacio seguro y agradable donde
             encuentres una cuidada selección de tiendas, servicios y actividades
             para toda la familia.
         </p>
-        <h6
-            class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize mb-4"
+        <a
+            href="/pdf/habeas-data.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize mb-2 block"
         >
             Políticas de tratamiento de la información
-        </h6>
+        </a>
         <div class="flex gap-6 border-b-3 pb-4">
             <h6
                 class="text-3xl font-semibold tracking-wide text-zinc-800 capitalize"

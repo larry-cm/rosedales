@@ -125,7 +125,7 @@ export const SelectReact: React.FC<SelectReactProps> = ({
                         <button
                             key={option.value}
                             type="button"
-                            className={`w-full px-4 py-3 text-left flex justify-between items-center   focus:outline-none transition duration-300 ${value === option.value ? 'bg-green-500  text-white font-semibold' : 'text-zinc-900 hover:scale-102 hover:bg-zinc-200'
+                            className={`w-full px-4 py-3 text-left flex justify-between items-center   focus:outline-none transition duration-300 ${value === option.value ? 'bg-green-500  text-white font-semibold' : 'text-zinc-700 hover:text-zinc-900 hover:scale-102 hover:bg-zinc-100'
                                 } ${focusedIndex === index ? 'bg-green-100' : ''} snap-center sm:snap-none`}
                             role="option"
                             aria-selected={value === option.value}
